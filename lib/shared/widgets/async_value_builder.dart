@@ -32,9 +32,9 @@ class AsyncValueBuilder<T> extends StatelessWidget {
       loading: () => loading ?? const LoadingWidget(),
       success: (data) => builder(data),
       error: (failure) =>
-          error?.call(failure.message, onRetry) ??
+          error?.call(failure?.message ?? 'Unknown error', onRetry) ??
           app.ErrorWidget(
-            message: failure.message,
+            message: failure?.message ?? 'Unknown error',
             onRetry: onRetry,
           ),
     );
@@ -102,9 +102,9 @@ class SliverAsyncValueBuilder<T> extends StatelessWidget {
       ),
       success: (data) => builder(data),
       error: (failure) => SliverToBoxAdapter(
-        child: error?.call(failure.message, onRetry) ??
+        child: error?.call(failure?.message ?? 'Unknown error', onRetry) ??
             app.ErrorWidget(
-              message: failure.message,
+              message: failure?.message ?? 'Unknown error',
               onRetry: onRetry,
             ),
       ),
