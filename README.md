@@ -4,34 +4,47 @@ A production-ready Flutter project template following Clean Architecture princip
 
 ## Features
 
--  Clean Architecture (Data, Domain, Presentation layers)
-- Riverpod for state management
-- GoRouter for navigation with auth guards
-- GetIt for dependency injection
-- Dio for networking with interceptors
-- Hive for local storage
-- Complete auth flow (login, register, logout)
-- Error handling with Either type
-- Reusable UI components
-- Dark/Light theme support
-- Localization ready
+- ✅ Clean Architecture (Data, Domain, Presentation layers)
+- ✅ Riverpod for state management
+- ✅ GoRouter for navigation with auth guards
+- ✅ GetIt for dependency injection
+- ✅ Dio for networking with interceptors
+- ✅ Hive for local storage
+- ✅ Complete auth flow (login, register, logout)
+- ✅ Error handling with Either type
+- ✅ Reusable UI components
+- ✅ Dark/Light theme support
+- ✅ Localization ready
+- ✅ **Environment configuration** (dev, staging, prod)
+- ✅ **Logger service** with debug, info, warning, error levels
+- ✅ **Real connectivity monitoring** with connectivity_plus
+- ✅ **Async state management** with pattern matching
+- ✅ **Dialog & Snackbar utilities**
+- ✅ **Date/time utilities**
+- ✅ **Design system** (spacing, radius, shadows)
+- ✅ **Cached network images** with placeholder/error states
+- ✅ **Pagination support** for list APIs
 
 ## Architecture
 
 ```
 lib/
-├── main.dart                       # Entry point
+├── main.dart                       # Development entry point
+├── main_staging.dart               # Staging entry point
+├── main_prod.dart                  # Production entry point
 ├── app.dart                        # App widget with MaterialApp
 ├── bootstrap.dart                  # App initialization & error handling
 ├── core/                           # Core utilities and configurations
-│   ├── constants/                  # App constants, API endpoints, strings
+│   ├── config/                    # Environment configuration
+│   ├── constants/                  # App constants, API endpoints, strings, dimensions
 │   ├── di/                        # Dependency injection (GetIt)
 │   ├── errors/                    # Failures & Exceptions
-│   ├── network/                   # Network client (Dio)
+│   ├── network/                   # Network client (Dio), API response wrapper
 │   ├── router/                    # GoRouter configuration
+│   ├── state/                     # Async state classes
 │   ├── theme/                     # App themes
 │   ├── usecase/                   # Base use case interfaces
-│   └── utils/                     # Extensions, validators
+│   └── utils/                     # Extensions, validators, logger, dialog, date utils
 ├── features/                      # Feature modules
 │   └── auth/                      # Authentication feature
 │       ├── data/                  # Data layer
@@ -64,6 +77,9 @@ lib/
 | `json_annotation` | JSON serialization annotations |
 | `shimmer` | Loading skeleton animations |
 | `flutter_localizations` | App localization |
+| `connectivity_plus` | Network connectivity monitoring |
+| `cached_network_image` | Image caching |
+| `intl` | Date/time formatting |
 
 ## Getting Started
 
@@ -73,18 +89,30 @@ lib/
 flutter pub get
 ```
 
-### 2. Configure API Base URL
+### 2. Configure Environment
 
-Update `lib/core/constants/app_constants.dart`:
+Update `lib/core/config/env_config.dart`:
 
 ```dart
-static const String baseUrl = 'https://your-api.com';
+static const EnvConfig dev = EnvConfig._(
+  environment: Environment.dev,
+  apiBaseUrl: 'https://dev-api.yourapp.com',
+  enableLogging: true,
+  enableCrashReporting: false,
+);
 ```
 
 ### 3. Run the App
 
 ```bash
+# Development
 flutter run
+
+# Staging
+flutter run -t lib/main_staging.dart
+
+# Production
+flutter run -t lib/main_prod.dart
 ```
 
 ## Creating a New Feature
@@ -173,6 +201,54 @@ dart run build_runner build --delete-conflicting-outputs
 4. **StateNotifier for state** - Immutable state with copyWith
 5. **Dependency inversion** - Depend on abstractions, not implementations
 6. **Keep providers simple** - Business logic in use cases, not providers
+
+## Utility Usage Examples
+
+### Logger
+
+```dart
+AppLogger.d('Debug message');
+AppLogger.i('Info message', tag: 'AUTH');
+AppLogger.w('Warning message');
+AppLogger.e('Error message', error: exception, stackTrace: stack);
+AppLogger.network('GET', '/api/users', statusCode: 200);
+```
+
+### Dialogs & Snackbars
+
+```dart
+// Show confirmation dialog
+final confirmed = await AppDialogs.showConfirmation(
+  context,
+  title: 'Delete?',
+  message: 'Are you sure?',
+  isDanger: true,
+);
+
+// Show snackbars
+AppSnackbars.showSuccess(context, 'Saved successfully');
+AppSnackbars.showError(context, 'Something went wrong');
+```
+
+### Async State Pattern
+
+```dart
+// In provider
+state.when(
+  initial: () => Container(),
+  loading: () => LoadingWidget(),
+  success: (data) => DataWidget(data),
+  error: (failure) => ErrorWidget(message: failure.message),
+);
+```
+
+### Date Utils
+
+```dart
+DateTimeUtils.formatDate(DateTime.now());        // "15/01/2024"
+DateTimeUtils.getRelativeTime(someDate);         // "2 hours ago"
+DateTimeUtils.isToday(DateTime.now());           // true
+```
 
 ## Error Handling
 

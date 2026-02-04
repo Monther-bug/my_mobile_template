@@ -32,11 +32,8 @@ class AsyncValueBuilder<T> extends StatelessWidget {
       loading: () => loading ?? const LoadingWidget(),
       success: (data) => builder(data),
       error: (failure) =>
-          error?.call(failure?.message ?? 'Unknown error', onRetry) ??
-          app.ErrorWidget(
-            message: failure?.message ?? 'Unknown error',
-            onRetry: onRetry,
-          ),
+          error?.call(failure.message, onRetry) ??
+          app.ErrorWidget(message: failure.message, onRetry: onRetry),
     );
   }
 }
@@ -67,10 +64,7 @@ class RiverpodAsyncBuilder<T> extends StatelessWidget {
       loading: () => loading ?? const LoadingWidget(),
       error: (error, stackTrace) =>
           errorBuilder?.call(error, stackTrace) ??
-          app.ErrorWidget(
-            message: error.toString(),
-            onRetry: onRetry,
-          ),
+          app.ErrorWidget(message: error.toString(), onRetry: onRetry),
       skipLoadingOnRefresh: skipLoadingOnRefresh,
     );
   }
@@ -97,16 +91,13 @@ class SliverAsyncValueBuilder<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return state.when(
       initial: () => const SliverToBoxAdapter(child: SizedBox.shrink()),
-      loading: () => SliverToBoxAdapter(
-        child: loading ?? const LoadingWidget(),
-      ),
+      loading: () =>
+          SliverToBoxAdapter(child: loading ?? const LoadingWidget()),
       success: (data) => builder(data),
       error: (failure) => SliverToBoxAdapter(
-        child: error?.call(failure?.message ?? 'Unknown error', onRetry) ??
-            app.ErrorWidget(
-              message: failure?.message ?? 'Unknown error',
-              onRetry: onRetry,
-            ),
+        child:
+            error?.call(failure.message, onRetry) ??
+            app.ErrorWidget(message: failure.message, onRetry: onRetry),
       ),
     );
   }

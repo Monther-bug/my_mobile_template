@@ -55,8 +55,10 @@ sealed class AsyncState<T> {
   bool get isError => this is AsyncError;
   bool get isInitial => this is AsyncInitial;
 
-  T? get dataOrNull => this is AsyncSuccess<T> ? (this as AsyncSuccess<T>).data : null;
-  Failure? get failureOrNull => this is AsyncError<T> ? (this as AsyncError<T>).failure : null;
+  T? get dataOrNull =>
+      this is AsyncSuccess<T> ? (this as AsyncSuccess<T>).data : null;
+  Failure? get failureOrNull =>
+      this is AsyncError<T> ? (this as AsyncError<T>).failure : null;
 }
 
 class AsyncInitial<T> extends AsyncState<T> {

@@ -30,14 +30,14 @@ class ApiResponse<T> {
   }
 
   factory ApiResponse.success(T data, {String? message}) {
-    return ApiResponse(
-      success: true,
-      data: data,
-      message: message,
-    );
+    return ApiResponse(success: true, data: data, message: message);
   }
 
-  factory ApiResponse.failure(String message, {int? statusCode, Map<String, dynamic>? errors}) {
+  factory ApiResponse.failure(
+    String message, {
+    int? statusCode,
+    Map<String, dynamic>? errors,
+  }) {
     return ApiResponse(
       success: false,
       message: message,
@@ -75,16 +75,22 @@ class PaginatedResponse<T> {
     T Function(Map<String, dynamic>) fromJsonT,
   ) {
     final data = json['data'] as Map<String, dynamic>? ?? json;
-    final itemsList = (data['items'] as List?) ?? (json['items'] as List?) ?? [];
+    final itemsList =
+        (data['items'] as List?) ?? (json['items'] as List?) ?? [];
 
     return PaginatedResponse(
-      items: itemsList.map((e) => fromJsonT(e as Map<String, dynamic>)).toList(),
+      items: itemsList
+          .map((e) => fromJsonT(e as Map<String, dynamic>))
+          .toList(),
       currentPage: data['currentPage'] ?? data['page'] ?? 1,
       totalPages: data['totalPages'] ?? data['lastPage'] ?? 1,
       totalItems: data['totalItems'] ?? data['total'] ?? itemsList.length,
       perPage: data['perPage'] ?? data['limit'] ?? 20,
-      hasNextPage: data['hasNextPage'] ?? (data['currentPage'] ?? 1) < (data['totalPages'] ?? 1),
-      hasPreviousPage: data['hasPreviousPage'] ?? (data['currentPage'] ?? 1) > 1,
+      hasNextPage:
+          data['hasNextPage'] ??
+          (data['currentPage'] ?? 1) < (data['totalPages'] ?? 1),
+      hasPreviousPage:
+          data['hasPreviousPage'] ?? (data['currentPage'] ?? 1) > 1,
     );
   }
 

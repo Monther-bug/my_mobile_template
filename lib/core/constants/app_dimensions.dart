@@ -20,18 +20,32 @@ class AppSpacing {
   static const EdgeInsets paddingXl = EdgeInsets.all(xl);
 
   // Horizontal padding
-  static const EdgeInsets paddingHorizontalSm = EdgeInsets.symmetric(horizontal: sm);
-  static const EdgeInsets paddingHorizontalMd = EdgeInsets.symmetric(horizontal: md);
-  static const EdgeInsets paddingHorizontalLg = EdgeInsets.symmetric(horizontal: lg);
+  static const EdgeInsets paddingHorizontalSm = EdgeInsets.symmetric(
+    horizontal: sm,
+  );
+  static const EdgeInsets paddingHorizontalMd = EdgeInsets.symmetric(
+    horizontal: md,
+  );
+  static const EdgeInsets paddingHorizontalLg = EdgeInsets.symmetric(
+    horizontal: lg,
+  );
 
   // Vertical padding
-  static const EdgeInsets paddingVerticalSm = EdgeInsets.symmetric(vertical: sm);
-  static const EdgeInsets paddingVerticalMd = EdgeInsets.symmetric(vertical: md);
-  static const EdgeInsets paddingVerticalLg = EdgeInsets.symmetric(vertical: lg);
+  static const EdgeInsets paddingVerticalSm = EdgeInsets.symmetric(
+    vertical: sm,
+  );
+  static const EdgeInsets paddingVerticalMd = EdgeInsets.symmetric(
+    vertical: md,
+  );
+  static const EdgeInsets paddingVerticalLg = EdgeInsets.symmetric(
+    vertical: lg,
+  );
 
   // Screen padding
   static const EdgeInsets screenPadding = EdgeInsets.all(md);
-  static const EdgeInsets screenPaddingHorizontal = EdgeInsets.symmetric(horizontal: md);
+  static const EdgeInsets screenPaddingHorizontal = EdgeInsets.symmetric(
+    horizontal: md,
+  );
 
   // SizedBox helpers
   static const SizedBox verticalXs = SizedBox(height: xs);
@@ -66,12 +80,20 @@ class AppRadius {
   static final BorderRadius borderRadiusRound = BorderRadius.circular(round);
 
   // Top only
-  static final BorderRadius borderRadiusTopMd = BorderRadius.vertical(top: Radius.circular(md));
-  static final BorderRadius borderRadiusTopLg = BorderRadius.vertical(top: Radius.circular(lg));
+  static final BorderRadius borderRadiusTopMd = BorderRadius.vertical(
+    top: Radius.circular(md),
+  );
+  static final BorderRadius borderRadiusTopLg = BorderRadius.vertical(
+    top: Radius.circular(lg),
+  );
 
   // Bottom only
-  static final BorderRadius borderRadiusBottomMd = BorderRadius.vertical(bottom: Radius.circular(md));
-  static final BorderRadius borderRadiusBottomLg = BorderRadius.vertical(bottom: Radius.circular(lg));
+  static final BorderRadius borderRadiusBottomMd = BorderRadius.vertical(
+    bottom: Radius.circular(md),
+  );
+  static final BorderRadius borderRadiusBottomLg = BorderRadius.vertical(
+    bottom: Radius.circular(lg),
+  );
 }
 
 /// Shadow constants
@@ -79,36 +101,36 @@ class AppShadows {
   AppShadows._();
 
   static List<BoxShadow> get sm => [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.05),
-          blurRadius: 4,
-          offset: const Offset(0, 2),
-        ),
-      ];
+    BoxShadow(
+      color: Colors.black.withOpacity(0.05),
+      blurRadius: 4,
+      offset: const Offset(0, 2),
+    ),
+  ];
 
   static List<BoxShadow> get md => [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.1),
-          blurRadius: 8,
-          offset: const Offset(0, 4),
-        ),
-      ];
+    BoxShadow(
+      color: Colors.black.withOpacity(0.1),
+      blurRadius: 8,
+      offset: const Offset(0, 4),
+    ),
+  ];
 
   static List<BoxShadow> get lg => [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.15),
-          blurRadius: 16,
-          offset: const Offset(0, 8),
-        ),
-      ];
+    BoxShadow(
+      color: Colors.black.withOpacity(0.15),
+      blurRadius: 16,
+      offset: const Offset(0, 8),
+    ),
+  ];
 
   static List<BoxShadow> get xl => [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.2),
-          blurRadius: 24,
-          offset: const Offset(0, 12),
-        ),
-      ];
+    BoxShadow(
+      color: Colors.black.withOpacity(0.2),
+      blurRadius: 24,
+      offset: const Offset(0, 12),
+    ),
+  ];
 }
 
 /// Duration constants for animations
