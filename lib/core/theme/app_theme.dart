@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Application theme configuration
 class AppTheme {
   AppTheme._();
 
@@ -22,7 +21,6 @@ class AppTheme {
   static const Color darkBackgroundColor = Color(0xFF121212);
   static const Color darkSurfaceColor = Color(0xFF1E1E1E);
 
-  /// Light theme
   static ThemeData get lightTheme {
     return ThemeData(
       useMaterial3: true,
@@ -87,7 +85,6 @@ class AppTheme {
     );
   }
 
-  /// Dark theme
   static ThemeData get darkTheme {
     return ThemeData(
       useMaterial3: true,

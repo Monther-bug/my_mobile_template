@@ -1,4 +1,3 @@
-/// Generic API response wrapper
 class ApiResponse<T> {
   final bool success;
   final T? data;
@@ -50,7 +49,6 @@ class ApiResponse<T> {
   bool get hasErrors => errors != null && errors!.isNotEmpty;
 }
 
-/// Paginated API response
 class PaginatedResponse<T> {
   final List<T> items;
   final int currentPage;

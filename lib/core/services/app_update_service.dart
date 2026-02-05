@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-/// App version information
 class AppVersion {
   final String version;
   final int buildNumber;
 
   const AppVersion({required this.version, required this.buildNumber});
 
-  /// Parse version string (e.g., "1.2.3")
   factory AppVersion.parse(String versionString, [int? build]) {
     return AppVersion(version: versionString, buildNumber: build ?? 0);
   }
 
-  /// Compare versions
   int compareTo(AppVersion other) {
     final thisParts = version.split('.').map(int.parse).toList();
     final otherParts = other.version.split('.').map(int.parse).toList();
@@ -37,10 +34,8 @@ class AppVersion {
   String toString() => version;
 }
 
-/// Update status
 enum UpdateStatus { upToDate, updateAvailable, forceUpdateRequired }
 
-/// Update info from server
 class UpdateInfo {
   final AppVersion latestVersion;
   final AppVersion minRequiredVersion;
@@ -64,7 +59,6 @@ class UpdateInfo {
   }
 }
 
-/// App update service
 class AppUpdateService {
   AppUpdateService._();
 
@@ -76,7 +70,6 @@ class AppUpdateService {
     );
   }
 
-  /// Check update status
   static Future<UpdateStatus> checkUpdateStatus(UpdateInfo updateInfo) async {
     final currentVersion = await getCurrentVersion();
 
@@ -91,7 +84,6 @@ class AppUpdateService {
     return UpdateStatus.upToDate;
   }
 
-  /// Show update dialog
   static Future<void> showUpdateDialog(
     BuildContext context, {
     required UpdateInfo updateInfo,

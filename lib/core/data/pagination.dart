@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-/// Paginated data wrapper
 class PaginatedData<T> {
   final List<T> items;
   final int currentPage;
@@ -60,7 +59,6 @@ class PaginatedData<T> {
     );
   }
 
-  /// Append new page to existing data
   PaginatedData<T> append(PaginatedData<T> newPage) {
     return PaginatedData(
       items: [...items, ...newPage.items],
@@ -72,7 +70,6 @@ class PaginatedData<T> {
   }
 }
 
-/// Pagination state
 class PaginationState<T> {
   final PaginatedData<T> data;
   final bool isLoading;
@@ -110,17 +107,14 @@ class PaginationState<T> {
   }
 }
 
-/// Base pagination notifier
 abstract class PaginationNotifier<T> extends StateNotifier<PaginationState<T>> {
   PaginationNotifier() : super(PaginationState.initial());
 
   int _currentPage = 1;
   final int _perPage = 20;
 
-  /// Fetch page from API
   Future<PaginatedData<T>> fetchPage(int page, int perPage);
 
-  /// Initial load
   Future<void> load() async {
     state = state.copyWith(isLoading: true, clearError: true);
     _currentPage = 1;
@@ -133,7 +127,6 @@ abstract class PaginationNotifier<T> extends StateNotifier<PaginationState<T>> {
     }
   }
 
-  /// Load more items
   Future<void> loadMore() async {
     if (!state.canLoadMore) return;
 
@@ -152,7 +145,6 @@ abstract class PaginationNotifier<T> extends StateNotifier<PaginationState<T>> {
     }
   }
 
-  /// Refresh data
   Future<void> refresh() async {
     _currentPage = 1;
     state = state.copyWith(clearError: true);
@@ -166,7 +158,6 @@ abstract class PaginationNotifier<T> extends StateNotifier<PaginationState<T>> {
   }
 }
 
-/// Paginated list view widget
 class PaginatedListView<T> extends StatelessWidget {
   final PaginationState<T> state;
   final Widget Function(BuildContext, T, int) itemBuilder;

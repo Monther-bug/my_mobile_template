@@ -3,7 +3,6 @@ import 'package:flutter/scheduler.dart';
 
 import 'logger.dart';
 
-/// Performance monitoring utilities
 class PerformanceMonitor {
   PerformanceMonitor._();
 
@@ -13,13 +12,11 @@ class PerformanceMonitor {
   final Map<String, Stopwatch> _timers = {};
   final Map<String, List<int>> _measurements = {};
 
-  /// Start timing an operation
   static void startTimer(String name) {
     if (!kDebugMode) return;
     instance._timers[name] = Stopwatch()..start();
   }
 
-  /// Stop timing and log the result
   static Duration? stopTimer(String name, {bool log = true}) {
     if (!kDebugMode) return null;
 
@@ -29,7 +26,6 @@ class PerformanceMonitor {
     timer.stop();
     final duration = timer.elapsed;
 
-    // Store measurement
     instance._measurements.putIfAbsent(name, () => []);
     instance._measurements[name]!.add(duration.inMicroseconds);
 
@@ -44,16 +40,14 @@ class PerformanceMonitor {
     return duration;
   }
 
-  /// Get average time for an operation
   static double? getAverageTime(String name) {
     final measurements = instance._measurements[name];
     if (measurements == null || measurements.isEmpty) return null;
 
     final sum = measurements.reduce((a, b) => a + b);
-    return sum / measurements.length / 1000; // Return in milliseconds
+    return sum / measurements.length / 1000;
   }
 
-  /// Log all measurements
   static void logAllMeasurements() {
     if (!kDebugMode) return;
 
@@ -68,13 +62,11 @@ class PerformanceMonitor {
     }
   }
 
-  /// Clear all measurements
   static void clear() {
     instance._timers.clear();
     instance._measurements.clear();
   }
 
-  /// Measure a synchronous function
   static T measure<T>(String name, T Function() function) {
     startTimer(name);
     try {
@@ -84,7 +76,6 @@ class PerformanceMonitor {
     }
   }
 
-  /// Measure an async function
   static Future<T> measureAsync<T>(
     String name,
     Future<T> Function() function,
@@ -98,15 +89,13 @@ class PerformanceMonitor {
   }
 }
 
-/// Frame callback tracker for monitoring jank
 class FrameMonitor {
   FrameMonitor._();
 
   static bool _isMonitoring = false;
   static final List<Duration> _frameDurations = [];
-  static const Duration _targetFrameTime = Duration(milliseconds: 16); // 60fps
+  static const Duration _targetFrameTime = Duration(milliseconds: 16);
 
-  /// Start monitoring frames
   static void start() {
     if (_isMonitoring || !kDebugMode) return;
     _isMonitoring = true;
@@ -116,7 +105,6 @@ class FrameMonitor {
     AppLogger.d('Frame monitoring started', tag: 'PERFORMANCE');
   }
 
-  /// Stop monitoring frames
   static void stop() {
     if (!_isMonitoring) return;
     _isMonitoring = false;
@@ -130,7 +118,6 @@ class FrameMonitor {
       final duration = Duration(microseconds: timing.totalSpan.inMicroseconds);
       _frameDurations.add(duration);
 
-      // Log jank frames (> 16ms)
       if (duration > _targetFrameTime) {
         AppLogger.w(
           'Jank detected: ${duration.inMilliseconds}ms frame',
@@ -161,42 +148,32 @@ class FrameMonitor {
   }
 }
 
-/// Memory monitoring
 class MemoryMonitor {
   MemoryMonitor._();
 
-  /// Log current memory usage (debug only)
   static void logMemoryUsage() {
     if (!kDebugMode) return;
-
-    // Note: Detailed memory info requires dart:developer
     AppLogger.d('Memory check requested', tag: 'MEMORY');
   }
 
-  /// Force garbage collection (debug only)
   static void forceGC() {
     if (!kDebugMode) return;
-    // GC is automatic in Dart, but we can hint at it
     AppLogger.d('GC hint sent', tag: 'MEMORY');
   }
 }
 
-/// Widget rebuild counter for debugging
 class RebuildCounter {
   static final Map<String, int> _counts = {};
 
-  /// Increment rebuild count for a widget
   static void increment(String widgetName) {
     if (!kDebugMode) return;
     _counts[widgetName] = (_counts[widgetName] ?? 0) + 1;
   }
 
-  /// Get rebuild count for a widget
   static int getCount(String widgetName) {
     return _counts[widgetName] ?? 0;
   }
 
-  /// Log all rebuild counts
   static void logAll() {
     if (!kDebugMode) return;
 
@@ -209,7 +186,6 @@ class RebuildCounter {
     }
   }
 
-  /// Clear all counts
   static void clear() {
     _counts.clear();
   }

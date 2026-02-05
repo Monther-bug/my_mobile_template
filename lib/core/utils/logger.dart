@@ -4,17 +4,14 @@ import 'package:flutter/foundation.dart';
 
 import '../config/env_config.dart';
 
-/// Log levels
 enum LogLevel { debug, info, warning, error }
 
-/// Application logger service
 class AppLogger {
   AppLogger._();
 
   static final AppLogger _instance = AppLogger._();
   static AppLogger get instance => _instance;
 
-  /// Log debug message
   static void d(
     String message, {
     String? tag,
@@ -30,7 +27,6 @@ class AppLogger {
     );
   }
 
-  /// Log info message
   static void i(
     String message, {
     String? tag,
@@ -46,7 +42,6 @@ class AppLogger {
     );
   }
 
-  /// Log warning message
   static void w(
     String message, {
     String? tag,
@@ -62,7 +57,6 @@ class AppLogger {
     );
   }
 
-  /// Log error message
   static void e(
     String message, {
     String? tag,
@@ -78,7 +72,6 @@ class AppLogger {
     );
   }
 
-  /// Log network request
   static void network(
     String method,
     String url, {
@@ -118,7 +111,6 @@ class AppLogger {
       );
     }
 
-    // Log errors to crash reporting in release mode
     if (level == LogLevel.error && error != null) {
       _reportToCrashlytics(error, stackTrace);
     }
@@ -150,8 +142,5 @@ class AppLogger {
     }
   }
 
-  static void _reportToCrashlytics(Object error, StackTrace? stackTrace) {
-    // TODO: Integrate with Firebase Crashlytics or similar
-    // FirebaseCrashlytics.instance.recordError(error, stackTrace);
-  }
+  static void _reportToCrashlytics(Object error, StackTrace? stackTrace) {}
 }

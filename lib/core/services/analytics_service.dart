@@ -1,4 +1,3 @@
-/// Analytics event names
 abstract class AnalyticsEvents {
   // Auth events
   static const String login = 'login';
@@ -25,7 +24,6 @@ abstract class AnalyticsEvents {
   static const String exception = 'exception';
 }
 
-/// Analytics parameter names
 abstract class AnalyticsParams {
   static const String screenName = 'screen_name';
   static const String screenClass = 'screen_class';
@@ -39,45 +37,32 @@ abstract class AnalyticsParams {
   static const String duration = 'duration';
 }
 
-/// Analytics service interface
 abstract class AnalyticsService {
-  /// Initialize analytics
   Future<void> initialize();
 
-  /// Log a custom event
   Future<void> logEvent(String name, [Map<String, dynamic>? parameters]);
 
-  /// Log screen view
   Future<void> logScreenView(String screenName, {String? screenClass});
 
-  /// Set user ID for analytics
   Future<void> setUserId(String? userId);
 
-  /// Set user properties
   Future<void> setUserProperty(String name, String? value);
 
-  /// Log login event
   Future<void> logLogin(String method);
 
-  /// Log sign up event
   Future<void> logSignUp(String method);
 
-  /// Log error event
   Future<void> logError(String message, {String? code, String? stackTrace});
 
-  /// Enable/disable analytics collection
   Future<void> setAnalyticsCollectionEnabled(bool enabled);
 }
 
-/// Analytics service implementation
-/// Replace with Firebase Analytics or your preferred analytics provider
 class AnalyticsServiceImpl implements AnalyticsService {
   bool _initialized = false;
   bool _enabled = true;
 
   @override
   Future<void> initialize() async {
-    // TODO: Initialize Firebase Analytics
     // await Firebase.initializeApp();
     // _analytics = FirebaseAnalytics.instance;
     _initialized = true;
@@ -87,7 +72,6 @@ class AnalyticsServiceImpl implements AnalyticsService {
   Future<void> logEvent(String name, [Map<String, dynamic>? parameters]) async {
     if (!_initialized || !_enabled) return;
 
-    // TODO: Log to Firebase Analytics
     // await _analytics.logEvent(name: name, parameters: parameters);
 
     // Debug logging
@@ -98,7 +82,6 @@ class AnalyticsServiceImpl implements AnalyticsService {
   Future<void> logScreenView(String screenName, {String? screenClass}) async {
     if (!_initialized || !_enabled) return;
 
-    // TODO: Log to Firebase Analytics
     // await _analytics.logScreenView(
     //   screenName: screenName,
     //   screenClass: screenClass,
@@ -111,7 +94,6 @@ class AnalyticsServiceImpl implements AnalyticsService {
   Future<void> setUserId(String? userId) async {
     if (!_initialized) return;
 
-    // TODO: Set user ID in Firebase Analytics
     // await _analytics.setUserId(id: userId);
 
     _debugLog('Set User ID: $userId');
@@ -121,7 +103,6 @@ class AnalyticsServiceImpl implements AnalyticsService {
   Future<void> setUserProperty(String name, String? value) async {
     if (!_initialized) return;
 
-    // TODO: Set user property in Firebase Analytics
     // await _analytics.setUserProperty(name: name, value: value);
 
     _debugLog('Set User Property: $name = $value');
@@ -154,14 +135,13 @@ class AnalyticsServiceImpl implements AnalyticsService {
   Future<void> setAnalyticsCollectionEnabled(bool enabled) async {
     _enabled = enabled;
 
-    // TODO: Set in Firebase Analytics
     // await _analytics.setAnalyticsCollectionEnabled(enabled);
   }
 
   void _debugLog(String message, [Map<String, dynamic>? params]) {
     assert(() {
       // ignore: avoid_print
-      print('📊 Analytics: $message ${params ?? ''}');
+      print(' Analytics: $message ${params ?? ''}');
       return true;
     }());
   }

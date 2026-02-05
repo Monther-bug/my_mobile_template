@@ -5,8 +5,6 @@ import '../../core/state/async_state.dart';
 import 'loading_widget.dart';
 import 'error_widget.dart' as app;
 
-/// Generic async value builder widget
-/// Handles loading, error, and success states automatically
 class AsyncValueBuilder<T> extends StatelessWidget {
   final AsyncState<T> state;
   final Widget Function(T data) builder;
@@ -38,7 +36,6 @@ class AsyncValueBuilder<T> extends StatelessWidget {
   }
 }
 
-/// Async value builder for Riverpod AsyncValue
 class RiverpodAsyncBuilder<T> extends StatelessWidget {
   final AsyncValue<T> asyncValue;
   final Widget Function(T data) builder;
@@ -70,7 +67,6 @@ class RiverpodAsyncBuilder<T> extends StatelessWidget {
   }
 }
 
-/// Sliver version of async value builder
 class SliverAsyncValueBuilder<T> extends StatelessWidget {
   final AsyncState<T> state;
   final Widget Function(T data) builder;

@@ -42,7 +42,6 @@ class _SplashPageState extends ConsumerState<SplashPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // App logo or icon
             Icon(
               Icons.rocket_launch,
               size: 80,

@@ -10,7 +10,6 @@ import 'app_routes.dart';
 
 export 'app_routes.dart';
 
-/// Router provider for Riverpod
 final routerProvider = Provider<GoRouter>((ref) {
   final authState = ref.watch(authStateProvider);
 
@@ -68,7 +67,6 @@ final routerProvider = Provider<GoRouter>((ref) {
   );
 });
 
-/// Router notifier for refreshing router when auth state changes
 class RouterNotifier extends ChangeNotifier {
   final Ref _ref;
 
@@ -77,7 +75,6 @@ class RouterNotifier extends ChangeNotifier {
   }
 }
 
-/// Error page for route errors
 class ErrorRoutePage extends StatelessWidget {
   final Exception? error;
 

@@ -1,4 +1,3 @@
-/// API endpoints used throughout the application
 class ApiEndpoints {
   ApiEndpoints._();
 

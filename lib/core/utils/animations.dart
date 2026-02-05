@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Animation utility classes and helpers
-
-/// Fade transition page route
 class FadePageRoute<T> extends PageRouteBuilder<T> {
   final Widget page;
 
@@ -16,7 +13,6 @@ class FadePageRoute<T> extends PageRouteBuilder<T> {
       );
 }
 
-/// Slide transition page route
 class SlidePageRoute<T> extends PageRouteBuilder<T> {
   final Widget page;
   final SlideDirection direction;
@@ -55,7 +51,6 @@ class SlidePageRoute<T> extends PageRouteBuilder<T> {
 
 enum SlideDirection { right, left, up, down }
 
-/// Scale transition page route
 class ScalePageRoute<T> extends PageRouteBuilder<T> {
   final Widget page;
 
@@ -74,7 +69,6 @@ class ScalePageRoute<T> extends PageRouteBuilder<T> {
       );
 }
 
-/// Animated list item wrapper
 class AnimatedListItem extends StatelessWidget {
   final int index;
   final Widget child;
@@ -111,7 +105,6 @@ class AnimatedListItem extends StatelessWidget {
   }
 }
 
-/// Shake animation for error feedback
 class ShakeWidget extends StatefulWidget {
   final Widget child;
   final int shakeCount;
@@ -177,7 +170,6 @@ class ShakeWidgetState extends State<ShakeWidget>
 double sin(double radians) => radians - (radians * radians * radians) / 6;
 double pi = 3.14159265359;
 
-/// Pulse animation widget
 class PulseWidget extends StatefulWidget {
   final Widget child;
   final Duration duration;
@@ -225,7 +217,6 @@ class _PulseWidgetState extends State<PulseWidget>
   }
 }
 
-/// Extensions for easy animation application
 extension AnimationExtensions on Widget {
   /// Wrap widget with fade in animation
   Widget fadeIn({Duration duration = const Duration(milliseconds: 300)}) {

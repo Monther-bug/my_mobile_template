@@ -5,7 +5,6 @@ import '../constants/app_constants.dart';
 import '../errors/exceptions.dart';
 import 'network_info.dart';
 
-/// Network client for making HTTP requests
 class NetworkClient {
   final Dio _dio;
   final NetworkInfo _networkInfo;
@@ -26,7 +25,6 @@ class NetworkClient {
     _dio.interceptors.addAll([_AuthInterceptor(), _LoggingInterceptor()]);
   }
 
-  /// GET request
   Future<Response<T>> get<T>(
     String path, {
     Map<String, dynamic>? queryParameters,
@@ -44,7 +42,6 @@ class NetworkClient {
     }
   }
 
-  /// POST request
   Future<Response<T>> post<T>(
     String path, {
     dynamic data,
@@ -64,7 +61,6 @@ class NetworkClient {
     }
   }
 
-  /// PUT request
   Future<Response<T>> put<T>(
     String path, {
     dynamic data,
@@ -84,7 +80,6 @@ class NetworkClient {
     }
   }
 
-  /// PATCH request
   Future<Response<T>> patch<T>(
     String path, {
     dynamic data,
@@ -104,7 +99,6 @@ class NetworkClient {
     }
   }
 
-  /// DELETE request
   Future<Response<T>> delete<T>(
     String path, {
     dynamic data,
@@ -124,14 +118,12 @@ class NetworkClient {
     }
   }
 
-  /// Check network connection
   Future<void> _checkConnection() async {
     if (!await _networkInfo.isConnected) {
       throw const NetworkException();
     }
   }
 
-  /// Handle Dio exceptions
   AppException _handleDioException(DioException e) {
     switch (e.type) {
       case DioExceptionType.connectionTimeout:
@@ -147,7 +139,6 @@ class NetworkClient {
     }
   }
 
-  /// Handle response errors
   AppException _handleResponseError(Response? response) {
     final statusCode = response?.statusCode;
     final message = response?.data?['message'] ?? 'Server error occurred';
@@ -173,36 +164,28 @@ class NetworkClient {
     }
   }
 
-  /// Set authorization token
   void setAuthToken(String token) {
     _dio.options.headers['Authorization'] = 'Bearer $token';
   }
 
-  /// Clear authorization token
   void clearAuthToken() {
     _dio.options.headers.remove('Authorization');
   }
 }
 
-/// Auth interceptor for handling authentication
 class _AuthInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    // Add any auth logic here
     handler.next(options);
   }
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    // Handle 401 errors for token refresh logic
-    if (err.response?.statusCode == 401) {
-      // TODO: Implement token refresh logic
-    }
+    if (err.response?.statusCode == 401) {}
     handler.next(err);
   }
 }
 
-/// Logging interceptor for debugging
 class _LoggingInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {

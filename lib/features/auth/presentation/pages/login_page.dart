@@ -8,7 +8,6 @@ import '../../../../shared/widgets/app_button.dart';
 import '../../../../shared/widgets/app_text_field.dart';
 import '../providers/auth_provider.dart';
 
-/// Login page
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
 
@@ -127,9 +126,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
-                      onPressed: () {
-                        // TODO: Navigate to forgot password
-                      },
+                      onPressed: () {},
                       child: const Text('Forgot Password?'),
                     ),
                   ),

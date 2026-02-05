@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-/// Cached network image with loading and error states
 class AppNetworkImage extends StatelessWidget {
   final String? imageUrl;
   final double? width;
@@ -111,7 +110,6 @@ class AppNetworkImage extends StatelessWidget {
   }
 }
 
-/// Avatar image with fallback to initials
 class AppAvatar extends StatelessWidget {
   final String? imageUrl;
   final String? name;

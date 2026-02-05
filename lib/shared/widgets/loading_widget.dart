@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Loading widget with optional message
 class LoadingWidget extends StatelessWidget {
   final String? message;
   final Color? color;
@@ -38,7 +37,6 @@ class LoadingWidget extends StatelessWidget {
   }
 }
 
-/// Full screen loading overlay
 class LoadingOverlay extends StatelessWidget {
   final bool isLoading;
   final Widget child;

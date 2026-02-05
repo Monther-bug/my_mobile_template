@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
-/// Dialog helper utilities
 class AppDialogs {
   AppDialogs._();
 
-  /// Show confirmation dialog
   static Future<bool> showConfirmation(
     BuildContext context, {
     required String title,
@@ -36,8 +34,7 @@ class AppDialogs {
     return result ?? false;
   }
 
-  /// Show info dialog
-  static Future<void> showInfo(
+  static void showInfo(
     BuildContext context, {
     required String title,
     required String message,
@@ -58,7 +55,6 @@ class AppDialogs {
     );
   }
 
-  /// Show loading dialog
   static void showLoading(BuildContext context, {String? message}) {
     showDialog(
       context: context,
@@ -78,12 +74,10 @@ class AppDialogs {
     );
   }
 
-  /// Hide loading dialog
   static void hideLoading(BuildContext context) {
     Navigator.of(context, rootNavigator: true).pop();
   }
 
-  /// Show bottom sheet
   static Future<T?> showBottomSheet<T>(
     BuildContext context, {
     required Widget child,
@@ -109,11 +103,9 @@ class AppDialogs {
   }
 }
 
-/// Snackbar helper utilities
 class AppSnackbars {
   AppSnackbars._();
 
-  /// Show success snackbar
   static void showSuccess(BuildContext context, String message) {
     _show(
       context,
@@ -123,7 +115,6 @@ class AppSnackbars {
     );
   }
 
-  /// Show error snackbar
   static void showError(BuildContext context, String message) {
     _show(
       context,
@@ -133,7 +124,6 @@ class AppSnackbars {
     );
   }
 
-  /// Show warning snackbar
   static void showWarning(BuildContext context, String message) {
     _show(
       context,
@@ -143,7 +133,6 @@ class AppSnackbars {
     );
   }
 
-  /// Show info snackbar
   static void showInfo(BuildContext context, String message) {
     _show(
       context,

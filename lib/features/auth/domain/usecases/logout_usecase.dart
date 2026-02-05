@@ -4,7 +4,6 @@ import '../../../../core/errors/failures.dart';
 import '../../../../core/usecase/usecase.dart';
 import '../repositories/auth_repository.dart';
 
-/// Logout use case
 class LogoutUseCase implements UseCaseNoParams<void> {
   final AuthRepository repository;
 

@@ -5,7 +5,6 @@ import '../../../../core/usecase/usecase.dart';
 import '../entities/user_entity.dart';
 import '../repositories/auth_repository.dart';
 
-/// Login use case parameters
 class LoginParams {
   final String email;
   final String password;
@@ -13,7 +12,6 @@ class LoginParams {
   const LoginParams({required this.email, required this.password});
 }
 
-/// Login use case
 class LoginUseCase implements UseCase<UserEntity, LoginParams> {
   final AuthRepository repository;
 

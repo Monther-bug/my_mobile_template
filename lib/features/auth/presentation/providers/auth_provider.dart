@@ -8,7 +8,6 @@ import '../../domain/usecases/login_usecase.dart';
 import '../../domain/usecases/logout_usecase.dart';
 import '../../domain/usecases/register_usecase.dart';
 
-/// Auth state
 class AuthState {
   final bool isLoading;
   final bool isAuthenticated;
@@ -56,7 +55,6 @@ class AuthState {
       failure.hashCode;
 }
 
-/// Auth state notifier
 class AuthNotifier extends StateNotifier<AuthState> {
   final LoginUseCase _loginUseCase;
   final RegisterUseCase _registerUseCase;
@@ -74,7 +72,6 @@ class AuthNotifier extends StateNotifier<AuthState> {
        _getCurrentUserUseCase = getCurrentUserUseCase,
        super(const AuthState());
 
-  /// Check authentication status on app start
   Future<void> checkAuthStatus() async {
     state = state.copyWith(isLoading: true, clearFailure: true);
 
@@ -98,7 +95,6 @@ class AuthNotifier extends StateNotifier<AuthState> {
     );
   }
 
-  /// Login with email and password
   Future<bool> login({required String email, required String password}) async {
     state = state.copyWith(isLoading: true, clearFailure: true);
 
@@ -122,7 +118,6 @@ class AuthNotifier extends StateNotifier<AuthState> {
     );
   }
 
-  /// Register new user
   Future<bool> register({
     required String email,
     required String password,
@@ -150,7 +145,6 @@ class AuthNotifier extends StateNotifier<AuthState> {
     );
   }
 
-  /// Logout
   Future<void> logout() async {
     state = state.copyWith(isLoading: true);
 
@@ -159,13 +153,11 @@ class AuthNotifier extends StateNotifier<AuthState> {
     state = const AuthState();
   }
 
-  /// Clear error
   void clearError() {
     state = state.copyWith(clearFailure: true);
   }
 }
 
-/// Auth state provider
 final authStateProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
   return AuthNotifier(
     loginUseCase: sl<LoginUseCase>(),
@@ -175,7 +167,6 @@ final authStateProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
   );
 });
 
-/// Convenience providers
 final isAuthenticatedProvider = Provider<bool>((ref) {
   return ref.watch(authStateProvider).isAuthenticated;
 });

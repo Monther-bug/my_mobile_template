@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Custom app button with loading state
 class AppButton extends StatelessWidget {
   final String text;
   final VoidCallback? onPressed;

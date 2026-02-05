@@ -4,7 +4,6 @@ import '../config/env_config.dart';
 import '../errors/exceptions.dart';
 import '../utils/logger.dart';
 
-/// Base API service for all API calls
 abstract class BaseApiService {
   final Dio _dio;
 
@@ -24,7 +23,6 @@ abstract class BaseApiService {
       ),
     );
 
-    // Add interceptors
     dio.interceptors.addAll([
       _AuthInterceptor(),
       _LoggingInterceptor(),
@@ -34,7 +32,6 @@ abstract class BaseApiService {
     return dio;
   }
 
-  /// GET request
   Future<T> get<T>(
     String path, {
     Map<String, dynamic>? queryParameters,
@@ -48,7 +45,6 @@ abstract class BaseApiService {
     }
   }
 
-  /// POST request
   Future<T> post<T>(
     String path, {
     dynamic data,
@@ -67,7 +63,6 @@ abstract class BaseApiService {
     }
   }
 
-  /// PUT request
   Future<T> put<T>(
     String path, {
     dynamic data,
@@ -86,7 +81,6 @@ abstract class BaseApiService {
     }
   }
 
-  /// DELETE request
   Future<T> delete<T>(
     String path, {
     dynamic data,
@@ -105,7 +99,6 @@ abstract class BaseApiService {
     }
   }
 
-  /// PATCH request
   Future<T> patch<T>(
     String path, {
     dynamic data,
@@ -124,7 +117,6 @@ abstract class BaseApiService {
     }
   }
 
-  /// Upload file
   Future<T> uploadFile<T>(
     String path, {
     required String filePath,
@@ -211,11 +203,9 @@ abstract class BaseApiService {
   }
 }
 
-/// Auth interceptor for adding tokens
 class _AuthInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    // TODO: Get token from secure storage and add to headers
     // final token = await SecureStorageService.instance.getToken();
     // if (token != null) {
     //   options.headers['Authorization'] = 'Bearer $token';
@@ -225,14 +215,11 @@ class _AuthInterceptor extends Interceptor {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    if (err.response?.statusCode == 401) {
-      // TODO: Handle token refresh or logout
-    }
+    if (err.response?.statusCode == 401) {}
     handler.next(err);
   }
 }
 
-/// Logging interceptor
 class _LoggingInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
@@ -260,7 +247,6 @@ class _LoggingInterceptor extends Interceptor {
   }
 }
 
-/// Error interceptor
 class _ErrorInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
@@ -270,7 +256,6 @@ class _ErrorInterceptor extends Interceptor {
   }
 }
 
-/// Validation exception for 422 errors
 class ValidationException implements Exception {
   final String message;
   final dynamic errors;

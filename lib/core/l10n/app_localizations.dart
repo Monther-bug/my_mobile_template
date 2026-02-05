@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// App localization support
 class AppLocalizations {
   final Locale locale;
 
@@ -146,7 +145,6 @@ class _AppLocalizationsDelegate
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
-/// Extension for easy access
 extension AppLocalizationsExtension on BuildContext {
   AppLocalizations get l10n => AppLocalizations.of(this);
 }

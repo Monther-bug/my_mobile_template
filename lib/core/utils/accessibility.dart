@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 
-/// Accessibility utilities and helpers
 class A11y {
   A11y._();
 
-  /// Announce message to screen readers using a live region
-  /// This works by creating an accessible announcement via semantic node
   static void announce(String message, {TextDirection? textDirection}) {
     // Use SemanticsBinding to trigger announcements
     // For Flutter 3.38+, announcements are handled via live regions
@@ -34,7 +31,6 @@ class A11y {
   }
 }
 
-/// Semantic wrapper for better accessibility
 class SemanticWrapper extends StatelessWidget {
   final Widget child;
   final String? label;
@@ -130,7 +126,6 @@ class SemanticWrapper extends StatelessWidget {
   }
 }
 
-/// Accessible button with proper semantics
 class AccessibleButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final Widget child;
@@ -159,7 +154,6 @@ class AccessibleButton extends StatelessWidget {
   }
 }
 
-/// Accessible image with description
 class AccessibleImage extends StatelessWidget {
   final ImageProvider image;
   final String semanticLabel;
@@ -192,7 +186,6 @@ class AccessibleImage extends StatelessWidget {
   }
 }
 
-/// Screen reader only text (visible to screen readers but not visually)
 class ScreenReaderOnly extends StatelessWidget {
   final String text;
 
@@ -204,7 +197,6 @@ class ScreenReaderOnly extends StatelessWidget {
   }
 }
 
-/// Exclude from semantics (for decorative elements)
 class Decorative extends StatelessWidget {
   final Widget child;
 
@@ -216,14 +208,11 @@ class Decorative extends StatelessWidget {
   }
 }
 
-/// Extensions for accessibility
 extension AccessibilityExtensions on Widget {
-  /// Add semantic label to widget
   Widget withSemanticLabel(String label) {
     return Semantics(label: label, child: this);
   }
 
-  /// Mark widget as a button
   Widget asButton({String? label, String? hint}) {
     return Semantics(button: true, label: label, hint: hint, child: this);
   }

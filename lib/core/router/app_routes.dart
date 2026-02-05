@@ -1,4 +1,3 @@
-/// Application route paths
 abstract class AppRoutes {
   static const String splash = '/';
   static const String login = '/login';

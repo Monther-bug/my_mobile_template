@@ -3,8 +3,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'user_entity.freezed.dart';
 part 'user_entity.g.dart';
 
-/// User entity - domain layer
-/// Using Freezed for immutability, copyWith, equality, and JSON serialization
 @freezed
 class UserEntity with _$UserEntity {
   const factory UserEntity({

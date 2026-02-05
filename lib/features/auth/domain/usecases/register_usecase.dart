@@ -5,7 +5,6 @@ import '../../../../core/usecase/usecase.dart';
 import '../entities/user_entity.dart';
 import '../repositories/auth_repository.dart';
 
-/// Register use case parameters
 class RegisterParams {
   final String email;
   final String password;
@@ -18,7 +17,6 @@ class RegisterParams {
   });
 }
 
-/// Register use case
 class RegisterUseCase implements UseCase<UserEntity, RegisterParams> {
   final AuthRepository repository;
 

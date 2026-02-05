@@ -18,7 +18,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       data: {'email': email, 'password': password},
     );
 
-    // Store token
     final token = response.data['token'] as String?;
     if (token != null) {
       networkClient.setAuthToken(token);
@@ -42,7 +41,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       },
     );
 
-    // Store token
     final token = response.data['token'] as String?;
     if (token != null) {
       networkClient.setAuthToken(token);

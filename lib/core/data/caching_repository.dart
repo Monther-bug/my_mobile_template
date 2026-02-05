@@ -2,27 +2,19 @@ import 'package:dartz/dartz.dart';
 
 import '../errors/failures.dart';
 
-/// Cache policy for data fetching
 enum CachePolicy {
-  /// Always fetch from network, ignore cache
   networkOnly,
 
-  /// Try cache first, if miss then network
   cacheFirst,
 
-  /// Try network first, if fails use cache
   networkFirst,
 
-  /// Only use cache, never fetch from network
   cacheOnly,
 
-  /// Fetch from network but return cache immediately while loading
   staleWhileRevalidate,
 }
 
-/// Base repository with caching support
 abstract class CachingRepository<T> {
-  /// Get data with caching policy
   Future<Either<Failure, T>> getData({
     required Future<T> Function() networkCall,
     required Future<T?> Function() cacheCall,
@@ -134,7 +126,6 @@ abstract class CachingRepository<T> {
   }
 }
 
-/// Cache entry with metadata
 class CacheEntry<T> {
   final T data;
   final DateTime cachedAt;

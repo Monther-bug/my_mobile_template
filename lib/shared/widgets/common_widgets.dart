@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Reusable card widget
 class AppCard extends StatelessWidget {
   final Widget child;
   final EdgeInsetsGeometry? padding;
@@ -61,7 +60,6 @@ class AppCard extends StatelessWidget {
   }
 }
 
-/// List tile with leading icon and trailing action
 class AppListTile extends StatelessWidget {
   final IconData? leadingIcon;
   final Color? leadingIconColor;
@@ -152,7 +150,6 @@ class AppListTile extends StatelessWidget {
   }
 }
 
-/// Badge widget
 class AppBadge extends StatelessWidget {
   final String text;
   final Color? backgroundColor;
@@ -189,7 +186,6 @@ class AppBadge extends StatelessWidget {
   }
 }
 
-/// Section header with optional action
 class SectionHeader extends StatelessWidget {
   final String title;
   final String? actionText;

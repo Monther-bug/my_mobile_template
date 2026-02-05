@@ -2,24 +2,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../errors/failures.dart';
 
-/// Base state for async operations
-/// Use this as a base for feature states to reduce boilerplate
 sealed class AsyncState<T> {
   const AsyncState();
 
-  /// Initial state
   factory AsyncState.initial() = AsyncInitial<T>;
 
-  /// Loading state
   factory AsyncState.loading() = AsyncLoading<T>;
 
-  /// Success state with data
   factory AsyncState.success(T data) = AsyncSuccess<T>;
 
-  /// Error state with failure
   factory AsyncState.error(Failure failure) = AsyncError<T>;
 
-  /// Pattern matching helper
   R when<R>({
     required R Function() initial,
     required R Function() loading,
@@ -34,7 +27,6 @@ sealed class AsyncState<T> {
     };
   }
 
-  /// Pattern matching with orElse fallback
   R maybeWhen<R>({
     R Function()? initial,
     R Function()? loading,
@@ -79,11 +71,9 @@ class AsyncError<T> extends AsyncState<T> {
   const AsyncError(this.failure);
 }
 
-/// Base state notifier with common async operation handling
 abstract class BaseStateNotifier<T> extends StateNotifier<AsyncState<T>> {
   BaseStateNotifier() : super(const AsyncInitial());
 
-  /// Execute an async operation and update state accordingly
   Future<void> execute(Future<T> Function() operation) async {
     state = AsyncState.loading();
     try {

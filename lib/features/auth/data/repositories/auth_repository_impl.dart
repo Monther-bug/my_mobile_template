@@ -7,7 +7,6 @@ import '../../domain/repositories/auth_repository.dart';
 import '../datasources/auth_local_datasource.dart';
 import '../datasources/auth_remote_datasource.dart';
 
-/// Implementation of AuthRepository
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource remoteDataSource;
   final AuthLocalDataSource localDataSource;
@@ -74,7 +73,6 @@ class AuthRepositoryImpl implements AuthRepository {
       await localDataSource.clearCache();
       return const Right(null);
     } catch (e) {
-      // Even if remote logout fails, clear local cache
       await localDataSource.clearCache();
       return const Right(null);
     }
@@ -83,22 +81,18 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, UserEntity?>> getCurrentUser() async {
     try {
-      // First try to get from cache
       final cachedUser = await localDataSource.getCachedUser();
       if (cachedUser != null) {
-        // Optionally refresh from server in background
         _refreshUserInBackground();
         return Right(cachedUser.toEntity());
       }
 
-      // If no cache, try to get from server
       final user = await remoteDataSource.getCurrentUser();
       await localDataSource.cacheUser(user);
       return Right(user.toEntity());
     } on AuthException {
       return const Right(null);
     } on NetworkException {
-      // Return cached user if available during network issues
       final cachedUser = await localDataSource.getCachedUser();
       return Right(cachedUser?.toEntity());
     } catch (e) {
@@ -138,13 +132,10 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
-  /// Refresh user data in background
   Future<void> _refreshUserInBackground() async {
     try {
       final user = await remoteDataSource.getCurrentUser();
       await localDataSource.cacheUser(user);
-    } catch (_) {
-      // Silently fail background refresh
-    }
+    } catch (_) {}
   }
 }

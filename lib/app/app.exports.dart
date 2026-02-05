@@ -1,4 +1,3 @@
-/// App module exports
 library;
 
 export 'app.dart';

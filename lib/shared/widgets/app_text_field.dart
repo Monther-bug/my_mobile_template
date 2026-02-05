@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-/// Custom text field with common configurations
 class AppTextField extends StatelessWidget {
   final TextEditingController? controller;
   final String? label;
@@ -80,7 +79,6 @@ class AppTextField extends StatelessWidget {
   }
 }
 
-/// Password text field with visibility toggle
 class AppPasswordField extends StatefulWidget {
   final TextEditingController? controller;
   final String? label;

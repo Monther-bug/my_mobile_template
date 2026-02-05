@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Base scaffold with common functionality
 class BasePage extends StatelessWidget {
   final String? title;
   final Widget body;
@@ -85,7 +84,6 @@ class BasePage extends StatelessWidget {
   }
 }
 
-/// Scrollable page with refresh support
 class ScrollablePage extends StatelessWidget {
   final String? title;
   final List<Widget> children;
@@ -145,7 +143,6 @@ class ScrollablePage extends StatelessWidget {
   }
 }
 
-/// Full screen loading overlay
 class LoadingOverlay extends StatelessWidget {
   final bool isLoading;
   final Widget child;

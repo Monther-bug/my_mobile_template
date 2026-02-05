@@ -1,26 +1,21 @@
 import 'package:flutter/material.dart';
 
-/// Form utilities and helpers
 class FormUtils {
   FormUtils._();
 
-  /// Unfocus all text fields
   static void unfocus(BuildContext context) {
     FocusScope.of(context).unfocus();
   }
 
-  /// Move focus to next field
   static void nextFocus(BuildContext context) {
     FocusScope.of(context).nextFocus();
   }
 
-  /// Request focus on a specific node
   static void requestFocus(BuildContext context, FocusNode node) {
     FocusScope.of(context).requestFocus(node);
   }
 }
 
-/// Form field wrapper with label and error handling
 class FormFieldWrapper extends StatelessWidget {
   final String? label;
   final String? hint;
@@ -89,7 +84,6 @@ class FormFieldWrapper extends StatelessWidget {
   }
 }
 
-/// Dropdown form field with styling
 class AppDropdownField<T> extends StatelessWidget {
   final T? value;
   final List<DropdownMenuItem<T>> items;
@@ -133,7 +127,6 @@ class AppDropdownField<T> extends StatelessWidget {
   }
 }
 
-/// Checkbox with label
 class AppCheckbox extends StatelessWidget {
   final bool value;
   final ValueChanged<bool?>? onChanged;
@@ -168,7 +161,6 @@ class AppCheckbox extends StatelessWidget {
   }
 }
 
-/// Switch with label
 class AppSwitch extends StatelessWidget {
   final bool value;
   final ValueChanged<bool>? onChanged;

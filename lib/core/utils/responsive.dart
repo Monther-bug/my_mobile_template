@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Responsive breakpoints
 class Breakpoints {
   Breakpoints._();
 
@@ -10,7 +9,6 @@ class Breakpoints {
   static const double largeDesktop = 1800;
 }
 
-/// Responsive utilities
 class Responsive extends StatelessWidget {
   final Widget mobile;
   final Widget? tablet;
@@ -23,21 +21,17 @@ class Responsive extends StatelessWidget {
     this.desktop,
   });
 
-  /// Check if current screen is mobile
   static bool isMobile(BuildContext context) =>
       MediaQuery.sizeOf(context).width < Breakpoints.mobile;
 
-  /// Check if current screen is tablet
   static bool isTablet(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
     return width >= Breakpoints.mobile && width < Breakpoints.desktop;
   }
 
-  /// Check if current screen is desktop
   static bool isDesktop(BuildContext context) =>
       MediaQuery.sizeOf(context).width >= Breakpoints.desktop;
 
-  /// Get current device type
   static DeviceType getDeviceType(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
     if (width < Breakpoints.mobile) return DeviceType.mobile;
@@ -45,7 +39,6 @@ class Responsive extends StatelessWidget {
     return DeviceType.desktop;
   }
 
-  /// Get responsive value based on screen size
   static T value<T>(
     BuildContext context, {
     required T mobile,
@@ -58,7 +51,6 @@ class Responsive extends StatelessWidget {
     return mobile;
   }
 
-  /// Get responsive padding
   static EdgeInsets padding(BuildContext context) {
     return value(
       context,
@@ -68,7 +60,6 @@ class Responsive extends StatelessWidget {
     );
   }
 
-  /// Get responsive horizontal padding
   static EdgeInsets horizontalPadding(BuildContext context) {
     return value(
       context,
@@ -92,10 +83,8 @@ class Responsive extends StatelessWidget {
   }
 }
 
-/// Device type enum
 enum DeviceType { mobile, tablet, desktop }
 
-/// Responsive builder for more control
 class ResponsiveBuilder extends StatelessWidget {
   final Widget Function(BuildContext context, DeviceType deviceType) builder;
 
@@ -107,7 +96,6 @@ class ResponsiveBuilder extends StatelessWidget {
   }
 }
 
-/// Responsive grid
 class ResponsiveGrid extends StatelessWidget {
   final List<Widget> children;
   final int mobileColumns;

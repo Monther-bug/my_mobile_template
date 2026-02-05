@@ -8,7 +8,6 @@ import '../../../../shared/widgets/app_button.dart';
 import '../../../../shared/widgets/app_text_field.dart';
 import '../providers/auth_provider.dart';
 
-/// Register page
 class RegisterPage extends ConsumerStatefulWidget {
   const RegisterPage({super.key});
 
@@ -35,7 +34,6 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
   Future<void> _handleRegister() async {
     if (!_formKey.currentState!.validate()) return;
 
-    // Clear previous errors
     ref.read(authStateProvider.notifier).clearError();
 
     final success = await ref
@@ -58,7 +56,6 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
     final theme = Theme.of(context);
     final authState = ref.watch(authStateProvider);
 
-    // Listen for errors
     ref.listen<AuthState>(authStateProvider, (previous, next) {
       if (next.failure != null && previous?.failure != next.failure) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -106,7 +103,6 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                   ),
                   const SizedBox(height: 48),
 
-                  // Name field (optional)
                   AppTextField(
                     controller: _nameController,
                     label: 'Name (optional)',
@@ -117,7 +113,6 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                   ),
                   const SizedBox(height: 16),
 
-                  // Email field
                   AppTextField(
                     controller: _emailController,
                     label: 'Email',
@@ -129,7 +124,6 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                   ),
                   const SizedBox(height: 16),
 
-                  // Password field
                   AppPasswordField(
                     controller: _passwordController,
                     label: 'Password',
@@ -139,7 +133,6 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                   ),
                   const SizedBox(height: 16),
 
-                  // Confirm password field
                   AppPasswordField(
                     controller: _confirmPasswordController,
                     label: 'Confirm Password',
@@ -153,7 +146,6 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                   ),
                   const SizedBox(height: 32),
 
-                  // Register button
                   AppButton(
                     text: 'Create Account',
                     onPressed: _handleRegister,
@@ -162,7 +154,6 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                   ),
                   const SizedBox(height: 24),
 
-                  // Login link
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

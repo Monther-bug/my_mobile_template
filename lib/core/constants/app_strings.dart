@@ -1,4 +1,3 @@
-/// Application strings (for non-localized strings or keys)
 class AppStrings {
   AppStrings._();
 

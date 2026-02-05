@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Spacing constants using 8-point grid system
 class AppSpacing {
   AppSpacing._();
 
@@ -61,7 +60,6 @@ class AppSpacing {
   static const SizedBox horizontalXl = SizedBox(width: xl);
 }
 
-/// Border radius constants
 class AppRadius {
   AppRadius._();
 
@@ -96,7 +94,6 @@ class AppRadius {
   );
 }
 
-/// Shadow constants
 class AppShadows {
   AppShadows._();
 
@@ -133,7 +130,6 @@ class AppShadows {
   ];
 }
 
-/// Duration constants for animations
 class AppDurations {
   AppDurations._();
 

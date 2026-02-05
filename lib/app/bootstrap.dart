@@ -9,15 +9,12 @@ import '../core/config/env_config.dart';
 import '../core/di/injection_container.dart';
 import '../core/utils/logger.dart';
 
-/// Bootstrap the application with the given environment configuration
 Future<void> bootstrap(
   FutureOr<Widget> Function() builder, {
   EnvConfig environment = EnvConfig.dev,
 }) async {
-  // Ensure Flutter is initialized
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize environment configuration
   AppConfig.init(environment);
 
   AppLogger.i(
@@ -25,13 +22,11 @@ Future<void> bootstrap(
     tag: 'BOOTSTRAP',
   );
 
-  // Set preferred orientations
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
 
-  // Set system UI overlay style
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -40,15 +35,12 @@ Future<void> bootstrap(
     ),
   );
 
-  // Setup error handling
   _setupErrorHandling();
 
-  // Initialize dependencies
   await initDependencies();
 
   AppLogger.i('App initialized successfully', tag: 'BOOTSTRAP');
 
-  // Run the app
   runApp(
     ProviderScope(
       observers: kDebugMode ? [_ProviderLogger()] : [],
@@ -57,9 +49,7 @@ Future<void> bootstrap(
   );
 }
 
-/// Setup global error handling
 void _setupErrorHandling() {
-  // Flutter errors
   FlutterError.onError = (details) {
     AppLogger.e(
       'Flutter error: ${details.exceptionAsString()}',
@@ -67,12 +57,9 @@ void _setupErrorHandling() {
       error: details.exception,
       stackTrace: details.stack,
     );
-    if (kReleaseMode) {
-      // Report to crash analytics (Firebase Crashlytics, Sentry, etc.)
-    }
+    if (kReleaseMode) {}
   };
 
-  // Platform errors
   PlatformDispatcher.instance.onError = (error, stack) {
     AppLogger.e(
       'Uncaught error',
@@ -84,7 +71,6 @@ void _setupErrorHandling() {
   };
 }
 
-/// Provider observer for debugging
 class _ProviderLogger extends ProviderObserver {
   @override
   void didUpdateProvider(

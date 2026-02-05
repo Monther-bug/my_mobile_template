@@ -4,7 +4,6 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('App Integration Tests', () {
     testWidgets('Full login flow test', (tester) async {
-      // TODO: Initialize app with test dependencies
       // await tester.pumpWidget(const ProviderScope(child: App()));
 
       // Example flow:

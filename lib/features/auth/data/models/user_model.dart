@@ -4,8 +4,6 @@ import '../../domain/entities/user_entity.dart';
 
 part 'user_model.g.dart';
 
-/// User model with JSON serialization
-/// Uses composition instead of inheritance since UserEntity uses Freezed
 @JsonSerializable()
 class UserModel {
   final String id;
@@ -27,7 +25,6 @@ class UserModel {
 
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
 
-  /// Convert to domain entity
   UserEntity toEntity() => UserEntity(
     id: id,
     email: email,
@@ -36,7 +33,6 @@ class UserModel {
     createdAt: createdAt,
   );
 
-  /// Create from domain entity
   factory UserModel.fromEntity(UserEntity entity) {
     return UserModel(
       id: entity.id,

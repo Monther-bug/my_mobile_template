@@ -1,8 +1,6 @@
-/// Form validators
 class Validators {
   Validators._();
 
-  /// Validate required field
   static String? required(String? value, [String? fieldName]) {
     if (value == null || value.trim().isEmpty) {
       return fieldName != null
@@ -12,7 +10,6 @@ class Validators {
     return null;
   }
 
-  /// Validate email
   static String? email(String? value) {
     if (value == null || value.isEmpty) {
       return 'Email is required';
@@ -23,7 +20,6 @@ class Validators {
     return null;
   }
 
-  /// Validate password
   static String? password(String? value) {
     if (value == null || value.isEmpty) {
       return 'Password is required';
@@ -34,7 +30,6 @@ class Validators {
     return null;
   }
 
-  /// Validate password with requirements
   static String? strongPassword(String? value) {
     if (value == null || value.isEmpty) {
       return 'Password is required';
@@ -57,7 +52,6 @@ class Validators {
     return null;
   }
 
-  /// Validate confirm password
   static String? confirmPassword(String? value, String password) {
     if (value == null || value.isEmpty) {
       return 'Please confirm your password';
@@ -68,7 +62,6 @@ class Validators {
     return null;
   }
 
-  /// Validate phone number
   static String? phone(String? value) {
     if (value == null || value.isEmpty) {
       return 'Phone number is required';
@@ -79,7 +72,6 @@ class Validators {
     return null;
   }
 
-  /// Validate minimum length
   static String? minLength(String? value, int min, [String? fieldName]) {
     if (value == null || value.isEmpty) {
       return fieldName != null
@@ -94,7 +86,6 @@ class Validators {
     return null;
   }
 
-  /// Validate maximum length
   static String? maxLength(String? value, int max, [String? fieldName]) {
     if (value != null && value.length > max) {
       return fieldName != null
@@ -104,7 +95,6 @@ class Validators {
     return null;
   }
 
-  /// Validate numeric value
   static String? numeric(String? value, [String? fieldName]) {
     if (value == null || value.isEmpty) {
       return fieldName != null

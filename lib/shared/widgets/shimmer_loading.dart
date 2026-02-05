@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-/// Shimmer loading widget for skeleton loading effect
 class ShimmerLoading extends StatelessWidget {
   final double width;
   final double height;
@@ -38,7 +37,6 @@ class ShimmerLoading extends StatelessWidget {
   }
 }
 
-/// Shimmer loading for list items
 class ShimmerListItem extends StatelessWidget {
   const ShimmerListItem({super.key});
 
@@ -69,7 +67,6 @@ class ShimmerListItem extends StatelessWidget {
   }
 }
 
-/// Shimmer loading for cards
 class ShimmerCard extends StatelessWidget {
   final double height;
 
@@ -88,7 +85,6 @@ class ShimmerCard extends StatelessWidget {
   }
 }
 
-/// Shimmer loading list
 class ShimmerList extends StatelessWidget {
   final int itemCount;
   final Widget Function(BuildContext, int)? itemBuilder;
