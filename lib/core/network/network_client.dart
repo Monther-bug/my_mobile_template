@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+
 import '../constants/app_constants.dart';
 import '../errors/exceptions.dart';
 import 'network_info.dart';
@@ -204,13 +206,13 @@ class _AuthInterceptor extends Interceptor {
 class _LoggingInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    print('REQUEST[${options.method}] => PATH: ${options.path}');
+    debugPrint('REQUEST[${options.method}] => PATH: ${options.path}');
     handler.next(options);
   }
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    print(
+    debugPrint(
       'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}',
     );
     handler.next(response);
@@ -218,7 +220,7 @@ class _LoggingInterceptor extends Interceptor {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    print(
+    debugPrint(
       'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}',
     );
     handler.next(err);
