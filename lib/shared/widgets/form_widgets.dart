@@ -120,7 +120,7 @@ class AppDropdownField<T> extends StatelessWidget {
       errorText: errorText,
       isRequired: isRequired,
       child: DropdownButtonFormField<T>(
-        value: value,
+        initialValue: value,
         items: items,
         onChanged: enabled ? onChanged : null,
         decoration: InputDecoration(

@@ -38,7 +38,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       data: {
         'email': email,
         'password': password,
-        if (name != null) 'name': name,
+        if (name case final n?) 'name': n,
       },
     );
 
