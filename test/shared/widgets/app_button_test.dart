@@ -9,10 +9,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: AppButton(
-              text: 'Test Button',
-              onPressed: () {},
-            ),
+            body: AppButton(text: 'Test Button', onPressed: () {}),
           ),
         ),
       );
@@ -41,12 +38,7 @@ void main() {
     testWidgets('should be disabled when onPressed is null', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: Scaffold(
-            body: AppButton(
-              text: 'Test Button',
-              onPressed: null,
-            ),
-          ),
+          home: Scaffold(body: AppButton(text: 'Test Button', onPressed: null)),
         ),
       );
 
@@ -54,8 +46,9 @@ void main() {
       expect(button.onPressed, isNull);
     });
 
-    testWidgets('should show loading indicator when isLoading is true',
-        (tester) async {
+    testWidgets('should show loading indicator when isLoading is true', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(

@@ -34,89 +34,90 @@ void main() {
 
   const tEmail = 'test@example.com';
   const tPassword = 'password123';
-  const tUserModel = UserModel(
-    id: '1',
-    email: tEmail,
-    name: 'Test User',
-  );
+  const tUserModel = UserModel(id: '1', email: tEmail, name: 'Test User');
   const UserEntity tUser = tUserModel;
 
   group('login', () {
     test('should return user when remote call is successful', () async {
       // Arrange
-      when(() => mockRemoteDataSource.login(
-            email: any(named: 'email'),
-            password: any(named: 'password'),
-          )).thenAnswer((_) async => tUserModel);
-      when(() => mockLocalDataSource.cacheUser(any()))
-          .thenAnswer((_) async {});
+      when(
+        () => mockRemoteDataSource.login(
+          email: any(named: 'email'),
+          password: any(named: 'password'),
+        ),
+      ).thenAnswer((_) async => tUserModel);
+      when(() => mockLocalDataSource.cacheUser(any())).thenAnswer((_) async {});
 
       // Act
-      final result = await repository.login(
-        email: tEmail,
-        password: tPassword,
-      );
+      final result = await repository.login(email: tEmail, password: tPassword);
 
       // Assert
       expect(result, const Right(tUser));
-      verify(() => mockRemoteDataSource.login(
-            email: tEmail,
-            password: tPassword,
-          )).called(1);
+      verify(
+        () => mockRemoteDataSource.login(email: tEmail, password: tPassword),
+      ).called(1);
       verify(() => mockLocalDataSource.cacheUser(tUserModel)).called(1);
     });
 
-    test('should return ServerFailure when remote call throws ServerException',
-        () async {
-      // Arrange
-      when(() => mockRemoteDataSource.login(
+    test(
+      'should return ServerFailure when remote call throws ServerException',
+      () async {
+        // Arrange
+        when(
+          () => mockRemoteDataSource.login(
             email: any(named: 'email'),
             password: any(named: 'password'),
-          )).thenThrow(const ServerException(message: 'Server error'));
+          ),
+        ).thenThrow(const ServerException(message: 'Server error'));
 
-      // Act
-      final result = await repository.login(
-        email: tEmail,
-        password: tPassword,
-      );
+        // Act
+        final result = await repository.login(
+          email: tEmail,
+          password: tPassword,
+        );
 
-      // Assert
-      expect(result, isA<Left<Failure, UserEntity>>());
-      result.fold(
-        (failure) => expect(failure, isA<ServerFailure>()),
-        (_) => fail('Should return failure'),
-      );
-    });
+        // Assert
+        expect(result, isA<Left<Failure, UserEntity>>());
+        result.fold(
+          (failure) => expect(failure, isA<ServerFailure>()),
+          (_) => fail('Should return failure'),
+        );
+      },
+    );
 
     test(
-        'should return NetworkFailure when remote call throws NetworkException',
-        () async {
-      // Arrange
-      when(() => mockRemoteDataSource.login(
+      'should return NetworkFailure when remote call throws NetworkException',
+      () async {
+        // Arrange
+        when(
+          () => mockRemoteDataSource.login(
             email: any(named: 'email'),
             password: any(named: 'password'),
-          )).thenThrow(const NetworkException(message: 'No internet'));
+          ),
+        ).thenThrow(const NetworkException(message: 'No internet'));
 
-      // Act
-      final result = await repository.login(
-        email: tEmail,
-        password: tPassword,
-      );
+        // Act
+        final result = await repository.login(
+          email: tEmail,
+          password: tPassword,
+        );
 
-      // Assert
-      expect(result, isA<Left<Failure, UserEntity>>());
-      result.fold(
-        (failure) => expect(failure, isA<NetworkFailure>()),
-        (_) => fail('Should return failure'),
-      );
-    });
+        // Assert
+        expect(result, isA<Left<Failure, UserEntity>>());
+        result.fold(
+          (failure) => expect(failure, isA<NetworkFailure>()),
+          (_) => fail('Should return failure'),
+        );
+      },
+    );
   });
 
   group('getCurrentUser', () {
     test('should return cached user when available', () async {
       // Arrange
-      when(() => mockLocalDataSource.getCachedUser())
-          .thenAnswer((_) async => tUserModel);
+      when(
+        () => mockLocalDataSource.getCachedUser(),
+      ).thenAnswer((_) async => tUserModel);
 
       // Act
       final result = await repository.getCurrentUser();
@@ -128,8 +129,9 @@ void main() {
 
     test('should return CacheFailure when no cached user', () async {
       // Arrange
-      when(() => mockLocalDataSource.getCachedUser())
-          .thenThrow(const CacheException(message: 'No cached user'));
+      when(
+        () => mockLocalDataSource.getCachedUser(),
+      ).thenThrow(const CacheException(message: 'No cached user'));
 
       // Act
       final result = await repository.getCurrentUser();

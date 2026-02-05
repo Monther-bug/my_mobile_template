@@ -70,12 +70,21 @@ void main() {
 
     group('confirmPassword', () {
       test('should return error message when passwords do not match', () {
-        expect(Validators.confirmPassword('different', 'password123'), isNotNull);
-        expect(Validators.confirmPassword('password', 'password123'), isNotNull);
+        expect(
+          Validators.confirmPassword('different', 'password123'),
+          isNotNull,
+        );
+        expect(
+          Validators.confirmPassword('password', 'password123'),
+          isNotNull,
+        );
       });
 
       test('should return null when passwords match', () {
-        expect(Validators.confirmPassword('password123', 'password123'), isNull);
+        expect(
+          Validators.confirmPassword('password123', 'password123'),
+          isNull,
+        );
       });
     });
 
@@ -102,4 +111,3 @@ void main() {
     });
   });
 }
-

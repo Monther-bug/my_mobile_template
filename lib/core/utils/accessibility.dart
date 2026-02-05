@@ -149,9 +149,7 @@ class AccessibleButton extends StatelessWidget {
       enabled: enabled,
       label: semanticLabel,
       hint: semanticHint,
-      child: ExcludeSemantics(
-        child: child,
-      ),
+      child: ExcludeSemantics(child: child),
     );
   }
 }
@@ -197,10 +195,7 @@ class ScreenReaderOnly extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Semantics(
-      label: text,
-      child: const SizedBox.shrink(),
-    );
+    return Semantics(label: text, child: const SizedBox.shrink());
   }
 }
 
@@ -225,21 +220,12 @@ extension AccessibilityExtensions on Widget {
 
   /// Mark widget as a button
   Widget asButton({String? label, String? hint}) {
-    return Semantics(
-      button: true,
-      label: label,
-      hint: hint,
-      child: this,
-    );
+    return Semantics(button: true, label: label, hint: hint, child: this);
   }
 
   /// Mark widget as a header
   Widget asHeader({String? label}) {
-    return Semantics(
-      header: true,
-      label: label,
-      child: this,
-    );
+    return Semantics(header: true, label: label, child: this);
   }
 
   /// Exclude widget from screen readers
@@ -249,10 +235,6 @@ extension AccessibilityExtensions on Widget {
 
   /// Mark as live region (announces changes)
   Widget asLiveRegion({String? label}) {
-    return Semantics(
-      liveRegion: true,
-      label: label,
-      child: this,
-    );
+    return Semantics(liveRegion: true, label: label, child: this);
   }
 }

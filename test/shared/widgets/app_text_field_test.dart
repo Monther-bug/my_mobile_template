@@ -9,10 +9,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: AppTextField(
-              label: 'Email',
-              hint: 'Enter email',
-            ),
+            body: AppTextField(label: 'Email', hint: 'Enter email'),
           ),
         ),
       );
@@ -24,10 +21,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: AppTextField(
-              label: 'Email',
-              hint: 'Enter email',
-            ),
+            body: AppTextField(label: 'Email', hint: 'Enter email'),
           ),
         ),
       );
@@ -41,10 +35,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: AppTextField(
-              label: 'Email',
-              controller: controller,
-            ),
+            body: AppTextField(label: 'Email', controller: controller),
           ),
         ),
       );
@@ -80,12 +71,7 @@ void main() {
     testWidgets('should be read-only when readOnly is true', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: Scaffold(
-            body: AppTextField(
-              label: 'Email',
-              readOnly: true,
-            ),
-          ),
+          home: Scaffold(body: AppTextField(label: 'Email', readOnly: true)),
         ),
       );
 
@@ -97,10 +83,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: AppTextField(
-              label: 'Password',
-              obscureText: true,
-            ),
+            body: AppTextField(label: 'Password', obscureText: true),
           ),
         ),
       );
@@ -113,10 +96,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: AppTextField(
-              label: 'Email',
-              prefixIcon: Icon(Icons.email),
-            ),
+            body: AppTextField(label: 'Email', prefixIcon: Icon(Icons.email)),
           ),
         ),
       );

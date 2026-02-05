@@ -5,15 +5,14 @@ class SecureStorageService {
   final FlutterSecureStorage _storage;
 
   SecureStorageService({FlutterSecureStorage? storage})
-      : _storage = storage ??
-            const FlutterSecureStorage(
-              aOptions: AndroidOptions(
-                encryptedSharedPreferences: true,
-              ),
-              iOptions: IOSOptions(
-                accessibility: KeychainAccessibility.first_unlock_this_device,
-              ),
-            );
+    : _storage =
+          storage ??
+          const FlutterSecureStorage(
+            aOptions: AndroidOptions(encryptedSharedPreferences: true),
+            iOptions: IOSOptions(
+              accessibility: KeychainAccessibility.first_unlock_this_device,
+            ),
+          );
 
   // Keys
   static const String _accessTokenKey = 'access_token';
@@ -76,10 +75,7 @@ class SecureStorageService {
 
   /// Save biometric preference
   Future<void> setBiometricEnabled(bool enabled) async {
-    await _storage.write(
-      key: _biometricEnabledKey,
-      value: enabled.toString(),
-    );
+    await _storage.write(key: _biometricEnabledKey, value: enabled.toString());
   }
 
   /// Get biometric preference

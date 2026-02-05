@@ -13,9 +13,7 @@ import 'package:mobile_template/app/app.dart';
 void main() {
   testWidgets('App smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(
-      const ProviderScope(child: App()),
-    );
+    await tester.pumpWidget(const ProviderScope(child: App()));
 
     // Verify app builds successfully
     expect(find.byType(App), findsOneWidget);

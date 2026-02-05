@@ -127,9 +127,7 @@ class FrameMonitor {
 
   static void _onFrame(List<FrameTiming> timings) {
     for (final timing in timings) {
-      final duration = Duration(
-        microseconds: timing.totalSpan.inMicroseconds,
-      );
+      final duration = Duration(microseconds: timing.totalSpan.inMicroseconds);
       _frameDurations.add(duration);
 
       // Log jank frames (> 16ms)
@@ -145,9 +143,8 @@ class FrameMonitor {
   static void _logFrameStats() {
     if (_frameDurations.isEmpty) return;
 
-    final avgMicros = _frameDurations
-            .map((d) => d.inMicroseconds)
-            .reduce((a, b) => a + b) /
+    final avgMicros =
+        _frameDurations.map((d) => d.inMicroseconds).reduce((a, b) => a + b) /
         _frameDurations.length;
 
     final jankFrames = _frameDurations

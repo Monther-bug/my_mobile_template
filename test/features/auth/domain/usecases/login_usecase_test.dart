@@ -21,19 +21,17 @@ void main() {
 
   const tEmail = 'test@example.com';
   const tPassword = 'password123';
-  const tUser = UserEntity(
-    id: '1',
-    email: tEmail,
-    name: 'Test User',
-  );
+  const tUser = UserEntity(id: '1', email: tEmail, name: 'Test User');
 
   group('LoginUseCase', () {
     test('should return UserEntity when login is successful', () async {
       // Arrange
-      when(() => mockRepository.login(
-            email: any(named: 'email'),
-            password: any(named: 'password'),
-          )).thenAnswer((_) async => const Right(tUser));
+      when(
+        () => mockRepository.login(
+          email: any(named: 'email'),
+          password: any(named: 'password'),
+        ),
+      ).thenAnswer((_) async => const Right(tUser));
 
       // Act
       final result = await useCase(
@@ -42,20 +40,21 @@ void main() {
 
       // Assert
       expect(result, const Right(tUser));
-      verify(() => mockRepository.login(
-            email: tEmail,
-            password: tPassword,
-          )).called(1);
+      verify(
+        () => mockRepository.login(email: tEmail, password: tPassword),
+      ).called(1);
       verifyNoMoreInteractions(mockRepository);
     });
 
     test('should return ServerFailure when login fails', () async {
       // Arrange
       const tFailure = ServerFailure(message: 'Invalid credentials');
-      when(() => mockRepository.login(
-            email: any(named: 'email'),
-            password: any(named: 'password'),
-          )).thenAnswer((_) async => const Left(tFailure));
+      when(
+        () => mockRepository.login(
+          email: any(named: 'email'),
+          password: any(named: 'password'),
+        ),
+      ).thenAnswer((_) async => const Left(tFailure));
 
       // Act
       final result = await useCase(
@@ -64,19 +63,20 @@ void main() {
 
       // Assert
       expect(result, const Left(tFailure));
-      verify(() => mockRepository.login(
-            email: tEmail,
-            password: tPassword,
-          )).called(1);
+      verify(
+        () => mockRepository.login(email: tEmail, password: tPassword),
+      ).called(1);
     });
 
     test('should return NetworkFailure when there is no internet', () async {
       // Arrange
       const tFailure = NetworkFailure(message: 'No internet connection');
-      when(() => mockRepository.login(
-            email: any(named: 'email'),
-            password: any(named: 'password'),
-          )).thenAnswer((_) async => const Left(tFailure));
+      when(
+        () => mockRepository.login(
+          email: any(named: 'email'),
+          password: any(named: 'password'),
+        ),
+      ).thenAnswer((_) async => const Left(tFailure));
 
       // Act
       final result = await useCase(
