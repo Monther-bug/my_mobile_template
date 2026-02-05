@@ -35,10 +35,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }) async {
     final response = await networkClient.post(
       ApiEndpoints.register,
-      data: {
+      data: <String, dynamic>{
         'email': email,
         'password': password,
-        if (name case final n?) 'name': n,
+        if (name != null) 'name': name,
       },
     );
 

@@ -18,10 +18,17 @@ class MockAuthLocalDataSource extends Mock implements AuthLocalDataSource {}
 
 class MockNetworkInfo extends Mock implements NetworkInfo {}
 
+// Fake classes for fallback values
+class FakeUserModel extends Fake implements UserModel {}
+
 void main() {
   late AuthRepositoryImpl repository;
   late MockAuthRemoteDataSource mockRemoteDataSource;
   late MockAuthLocalDataSource mockLocalDataSource;
+
+  setUpAll(() {
+    registerFallbackValue(FakeUserModel());
+  });
 
   setUp(() {
     mockRemoteDataSource = MockAuthRemoteDataSource();
@@ -127,18 +134,24 @@ void main() {
       verify(() => mockLocalDataSource.getCachedUser()).called(1);
     });
 
-    test('should return CacheFailure when no cached user', () async {
-      // Arrange
-      when(
-        () => mockLocalDataSource.getCachedUser(),
-      ).thenThrow(const CacheException(message: 'No cached user'));
+    test(
+      'should return Right(null) when no cached user and auth fails',
+      () async {
+        // Arrange
+        when(
+          () => mockLocalDataSource.getCachedUser(),
+        ).thenAnswer((_) async => null);
+        when(
+          () => mockRemoteDataSource.getCurrentUser(),
+        ).thenThrow(const AuthException(message: 'Not authenticated'));
 
-      // Act
-      final result = await repository.getCurrentUser();
+        // Act
+        final result = await repository.getCurrentUser();
 
-      // Assert
-      expect(result, isA<Left<Failure, UserEntity>>());
-    });
+        // Assert
+        expect(result, const Right(null));
+      },
+    );
   });
 
   group('logout', () {

@@ -124,11 +124,7 @@ class ScrollablePage extends StatelessWidget {
       controller: controller,
       padding: padding ?? const EdgeInsets.all(16),
       shrinkWrap: shrinkWrap,
-      children: [
-        ?header,
-        ...children,
-        ?footer,
-      ],
+      children: [?header, ...children, ?footer],
     );
 
     if (onRefresh != null) {
