@@ -1,4 +1,4 @@
-# Mobile Template 
+# Mobile Template
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.24+-blue.svg)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-3.5+-blue.svg)](https://dart.dev)
@@ -7,20 +7,21 @@
 
 A **production-ready** Flutter project template following **Clean Architecture** principles with Riverpod state management. Built with enterprise-grade features for scalable mobile applications.
 
-##  Table of Contents
+## Table of Contents
 
-- [Features](#-features)
-- [Architecture](#-architecture)
-- [Project Structure](#-project-structure)
-- [Getting Started](#-getting-started)
-- [Configuration](#-configuration)
-- [Development](#-development)
-- [Testing](#-testing)
-- [Packages](#-packages)
-- [Documentation](#-documentation)
-- [License](#-license)
+- [Features](#features)
+- [Architecture](#architecture)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Configuration](#configuration)
+- [Development](#development)
+- [Testing](#testing)
+- [Packages](#packages)
+- [Documentation](#documentation)
+- [Author](#author)
+- [License](#license)
 
-##  Features
+## Features
 
 ### Architecture & Code Quality
 - **Clean Architecture** - Data, Domain, Presentation layers with clear separation
@@ -87,103 +88,103 @@ A **production-ready** Flutter project template following **Clean Architecture**
 - **Crash reporting** - Ready for Crashlytics/Sentry integration
 - **App update service** - Version checking and force update support
 
-##  Architecture
+## Architecture
 
 This template implements **Clean Architecture** with three main layers:
 
-\`\`\`
-┌─────────────────────────────────────────────────────────────────┐
-│                     PRESENTATION LAYER                          │
-│         (Pages, Widgets, Providers, Controllers)                │
-│                                                                 │
-│  • UI components and screens                                    │
-│  • State management (Riverpod)                                  │
-│  • User interaction handling                                    │
-├─────────────────────────────────────────────────────────────────┤
-│                       DOMAIN LAYER                              │
-│       (Entities, Use Cases, Repository Interfaces)             │
-│                                                                 │
-│  • Business logic and rules                                     │
-│  • Platform-independent                                         │
-│  • No external dependencies                                     │
-├─────────────────────────────────────────────────────────────────┤
-│                        DATA LAYER                               │
-│    (Models, Repository Implementations, Data Sources)          │
-│                                                                 │
-│  • API integration                                              │
-│  • Local storage                                                │
-│  • Data transformation                                          │
-├─────────────────────────────────────────────────────────────────┤
-│                        CORE LAYER                               │
-│      (DI, Network, Router, Utils, Config, Services)            │
-│                                                                 │
-│  • Shared infrastructure                                        │
-│  • Cross-cutting concerns                                       │
-│  • Configuration and utilities                                  │
-└─────────────────────────────────────────────────────────────────┘
-\`\`\`
+```
++------------------------------------------------------------------+
+|                      PRESENTATION LAYER                           |
+|          (Pages, Widgets, Providers, Controllers)                 |
+|                                                                   |
+|   - UI components and screens                                     |
+|   - State management (Riverpod)                                   |
+|   - User interaction handling                                     |
++------------------------------------------------------------------+
+|                        DOMAIN LAYER                               |
+|        (Entities, Use Cases, Repository Interfaces)               |
+|                                                                   |
+|   - Business logic and rules                                      |
+|   - Platform-independent                                          |
+|   - No external dependencies                                      |
++------------------------------------------------------------------+
+|                         DATA LAYER                                |
+|     (Models, Repository Implementations, Data Sources)            |
+|                                                                   |
+|   - API integration                                               |
+|   - Local storage                                                 |
+|   - Data transformation                                           |
++------------------------------------------------------------------+
+|                         CORE LAYER                                |
+|       (DI, Network, Router, Utils, Config, Services)              |
+|                                                                   |
+|   - Shared infrastructure                                         |
+|   - Cross-cutting concerns                                        |
+|   - Configuration and utilities                                   |
++------------------------------------------------------------------+
+```
 
 ### Dependency Flow
 
-\`\`\`
-Presentation → Domain ← Data
-      ↓          ↓        ↓
-          ←── Core ───→
-\`\`\`
+```
+Presentation --> Domain <-- Data
+      |            |          |
+      +-------- Core ---------+
+```
 
 **Key Principle**: Inner layers don't know about outer layers. Domain defines interfaces, Data implements them.
 
-##  Project Structure
+## Project Structure
 
-\`\`\`
+```
 lib/
-├── main.dart                    # Development entry point
-├── main_staging.dart            # Staging entry point
-├── main_prod.dart               # Production entry point
-│
-├── app/                         # App configuration
-│   ├── app.dart                 # MaterialApp widget
-│   ├── app_providers.dart       # Global Riverpod providers
-│   ├── app.exports.dart         # App barrel exports
-│   └── bootstrap.dart           # App initialization
-│
-├── core/                        # Core utilities & infrastructure
-│   ├── config/                  # Environment & feature flags
-│   ├── constants/               # App constants
-│   ├── data/                    # Base data utilities
-│   ├── di/                      # Dependency injection
-│   ├── error/                   # Freezed error types
-│   ├── errors/                  # Exception & failure classes
-│   ├── l10n/                    # Localization
-│   ├── network/                 # HTTP client & API
-│   ├── router/                  # Navigation
-│   ├── services/                # Cross-cutting services
-│   ├── state/                   # State utilities
-│   ├── storage/                 # Local storage
-│   ├── theme/                   # Theming
-│   ├── types/                   # Generic types
-│   ├── usecase/                 # Base use case
-│   └── utils/                   # Utilities
-│
-├── features/                    # Feature modules
-│   └── auth/                    # Authentication feature
-│       ├── data/
-│       │   ├── datasources/
-│       │   ├── models/
-│       │   └── repositories/
-│       ├── domain/
-│       │   ├── entities/
-│       │   ├── repositories/
-│       │   └── usecases/
-│       └── presentation/
-│           ├── pages/
-│           └── providers/
-│
-└── shared/                      # Shared UI components
-    └── widgets/
-\`\`\`
+|-- main.dart                    # Development entry point
+|-- main_staging.dart            # Staging entry point
+|-- main_prod.dart               # Production entry point
+|
+|-- app/                         # App configuration
+|   |-- app.dart                 # MaterialApp widget
+|   |-- app_providers.dart       # Global Riverpod providers
+|   |-- app.exports.dart         # App barrel exports
+|   +-- bootstrap.dart           # App initialization
+|
+|-- core/                        # Core utilities & infrastructure
+|   |-- config/                  # Environment & feature flags
+|   |-- constants/               # App constants
+|   |-- data/                    # Base data utilities
+|   |-- di/                      # Dependency injection
+|   |-- error/                   # Freezed error types
+|   |-- errors/                  # Exception & failure classes
+|   |-- l10n/                    # Localization
+|   |-- network/                 # HTTP client & API
+|   |-- router/                  # Navigation
+|   |-- services/                # Cross-cutting services
+|   |-- state/                   # State utilities
+|   |-- storage/                 # Local storage
+|   |-- theme/                   # Theming
+|   |-- types/                   # Generic types
+|   |-- usecase/                 # Base use case
+|   +-- utils/                   # Utilities
+|
+|-- features/                    # Feature modules
+|   +-- auth/                    # Authentication feature
+|       |-- data/
+|       |   |-- datasources/
+|       |   |-- models/
+|       |   +-- repositories/
+|       |-- domain/
+|       |   |-- entities/
+|       |   |-- repositories/
+|       |   +-- usecases/
+|       +-- presentation/
+|           |-- pages/
+|           +-- providers/
+|
++-- shared/                      # Shared UI components
+    +-- widgets/
+```
 
-##  Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -195,23 +196,27 @@ lib/
 ### Installation
 
 1. **Clone the repository**
-\`\`\`bash
-git clone https://github.com/YOUR_USERNAME/mobile_template.git
+
+```bash
+git clone https://github.com/Monther-bug/mobile_template.git
 cd mobile_template
-\`\`\`
+```
 
 2. **Install dependencies**
-\`\`\`bash
+
+```bash
 flutter pub get
-\`\`\`
+```
 
 3. **Run code generation**
-\`\`\`bash
+
+```bash
 dart run build_runner build --delete-conflicting-outputs
-\`\`\`
+```
 
 4. **Run the app**
-\`\`\`bash
+
+```bash
 # Development
 flutter run
 
@@ -220,15 +225,15 @@ flutter run -t lib/main_staging.dart
 
 # Production
 flutter run -t lib/main_prod.dart
-\`\`\`
+```
 
-## ⚙️ Configuration
+## Configuration
 
 ### Environment Configuration
 
-Edit \`lib/core/config/env_config.dart\`:
+Edit `lib/core/config/env_config.dart`:
 
-\`\`\`dart
+```dart
 static const EnvConfig dev = EnvConfig._(
   environment: Environment.dev,
   apiBaseUrl: 'https://dev-api.yourapp.com',
@@ -249,31 +254,33 @@ static const EnvConfig prod = EnvConfig._(
   enableLogging: false,
   enableCrashReporting: true,
 );
-\`\`\`
+```
 
 ### Feature Flags
 
-Edit \`lib/core/config/feature_flags.dart\`:
+Edit `lib/core/config/feature_flags.dart`:
 
-\`\`\`dart
+```dart
 class FeatureFlags {
   static bool enableNewOnboarding = false;
   static bool enableDarkMode = true;
   static bool enableBiometricAuth = true;
 }
-\`\`\`
+```
 
-##  Development
+## Development
 
 ### Creating a New Feature
 
 1. **Create folder structure**
-\`\`\`bash
+
+```bash
 mkdir -p lib/features/your_feature/{data/{datasources,models,repositories},domain/{entities,repositories,usecases},presentation/{pages,providers,widgets}}
-\`\`\`
+```
 
 2. **Domain Layer** (define first - no dependencies)
-\`\`\`dart
+
+```dart
 // entities/product_entity.dart
 class ProductEntity {
   final String id;
@@ -296,10 +303,11 @@ class GetProductsUseCase implements UseCaseNoParams<List<ProductEntity>> {
     return repository.getProducts();
   }
 }
-\`\`\`
+```
 
 3. **Data Layer** (implement domain interfaces)
-\`\`\`dart
+
+```dart
 // models/product_model.dart
 @JsonSerializable()
 class ProductModel {
@@ -324,10 +332,11 @@ class ProductRepositoryImpl implements ProductRepository {
     }
   }
 }
-\`\`\`
+```
 
 4. **Presentation Layer** (UI and state)
-\`\`\`dart
+
+```dart
 // providers/products_provider.dart
 final productsProvider = FutureProvider<List<ProductEntity>>((ref) async {
   final useCase = ref.read(getProductsUseCaseProvider);
@@ -350,10 +359,11 @@ class ProductsPage extends ConsumerWidget {
     );
   }
 }
-\`\`\`
+```
 
-5. **Register dependencies** in \`lib/core/di/injection_container.dart\`
-\`\`\`dart
+5. **Register dependencies** in `lib/core/di/injection_container.dart`
+
+```dart
 Future<void> _initProducts() async {
   sl.registerLazySingleton<ProductRemoteDataSource>(
     () => ProductRemoteDataSourceImpl(client: sl()),
@@ -363,41 +373,44 @@ Future<void> _initProducts() async {
   );
   sl.registerLazySingleton(() => GetProductsUseCase(sl()));
 }
-\`\`\`
+```
 
-6. **Add routes** in \`lib/core/router/app_router.dart\`
-\`\`\`dart
+6. **Add routes** in `lib/core/router/app_router.dart`
+
+```dart
 GoRoute(
   path: AppRoutes.products,
   name: 'products',
   builder: (context, state) => const ProductsPage(),
 ),
-\`\`\`
+```
 
 ### Code Generation
 
 After modifying Freezed or JSON serializable models:
 
-\`\`\`bash
+```bash
 # One-time build
 dart run build_runner build --delete-conflicting-outputs
 
 # Watch mode (recommended during development)
 dart run build_runner watch --delete-conflicting-outputs
-\`\`\`
+```
 
 ### Utilities
 
 **Logger**
-\`\`\`dart
+
+```dart
 AppLogger.d('Debug message');
 AppLogger.i('Info message', tag: 'AUTH');
 AppLogger.w('Warning message');
 AppLogger.e('Error', error: exception, stackTrace: stack);
-\`\`\`
+```
 
 **Dialogs & Snackbars**
-\`\`\`dart
+
+```dart
 final confirmed = await AppDialogs.showConfirmation(
   context,
   title: 'Delete?',
@@ -406,27 +419,29 @@ final confirmed = await AppDialogs.showConfirmation(
 
 AppSnackbars.showSuccess(context, 'Saved successfully!');
 AppSnackbars.showError(context, 'Something went wrong');
-\`\`\`
+```
 
 **Validators**
-\`\`\`dart
+
+```dart
 Validators.validateEmail('user@example.com');
 Validators.validatePassword('password123');
 Validators.validateRequired('value', fieldName: 'Name');
-\`\`\`
+```
 
 **Date Utilities**
-\`\`\`dart
+
+```dart
 DateTimeUtils.formatDate(DateTime.now());
 DateTimeUtils.getRelativeTime(someDate);
 DateTimeUtils.isToday(someDate);
-\`\`\`
+```
 
-##  Testing
+## Testing
 
 ### Run Tests
 
-\`\`\`bash
+```bash
 # All tests
 flutter test
 
@@ -438,27 +453,27 @@ flutter test test/features/auth/domain/usecases/login_usecase_test.dart
 
 # Integration tests
 flutter test integration_test/
-\`\`\`
+```
 
 ### Test Structure
 
-\`\`\`
+```
 test/
-├── core/
-│   ├── utils/
-│   └── network/
-├── features/
-│   └── auth/
-│       ├── domain/
-│       ├── data/
-│       └── presentation/
-└── shared/
-    └── widgets/
-\`\`\`
+|-- core/
+|   |-- utils/
+|   +-- network/
+|-- features/
+|   +-- auth/
+|       |-- domain/
+|       |-- data/
+|       +-- presentation/
++-- shared/
+    +-- widgets/
+```
 
 ### Example Test
 
-\`\`\`dart
+```dart
 void main() {
   late MockAuthRepository mockRepository;
   late LoginUseCase useCase;
@@ -487,29 +502,29 @@ void main() {
     });
   });
 }
-\`\`\`
+```
 
-##  Packages
+## Packages
 
 | Category | Package | Purpose |
 |----------|---------|---------|
-| **State** | \`flutter_riverpod\` | State management |
-| **DI** | \`get_it\` | Dependency injection |
-| **Routing** | \`go_router\` | Navigation |
-| **Network** | \`dio\` | HTTP client |
-| **Functional** | \`dartz\` | Either type, functional utils |
-| **Code Gen** | \`freezed\` | Immutable classes |
-| **JSON** | \`json_serializable\` | JSON serialization |
-| **Storage** | \`hive_flutter\` | Local database |
-| **Security** | \`flutter_secure_storage\` | Encrypted storage |
-| **Connectivity** | \`connectivity_plus\` | Network status |
-| **Image** | \`cached_network_image\` | Image caching |
-| **UI** | \`shimmer\` | Loading skeletons |
-| **i18n** | \`intl\` | Internationalization |
-| **Info** | \`package_info_plus\` | App version info |
-| **Testing** | \`mocktail\` | Mocking |
+| **State** | `flutter_riverpod` | State management |
+| **DI** | `get_it` | Dependency injection |
+| **Routing** | `go_router` | Navigation |
+| **Network** | `dio` | HTTP client |
+| **Functional** | `dartz` | Either type, functional utils |
+| **Code Gen** | `freezed` | Immutable classes |
+| **JSON** | `json_serializable` | JSON serialization |
+| **Storage** | `hive_flutter` | Local database |
+| **Security** | `flutter_secure_storage` | Encrypted storage |
+| **Connectivity** | `connectivity_plus` | Network status |
+| **Image** | `cached_network_image` | Image caching |
+| **UI** | `shimmer` | Loading skeletons |
+| **i18n** | `intl` | Internationalization |
+| **Info** | `package_info_plus` | App version info |
+| **Testing** | `mocktail` | Mocking |
 
-##  Documentation
+## Documentation
 
 - [Architecture Guide](docs/ARCHITECTURE.md) - Detailed architecture documentation
 - [API Documentation](docs/API.md) - API endpoints and integration guide
@@ -517,28 +532,31 @@ void main() {
 
 ## Security
 
-- Tokens stored in \`FlutterSecureStorage\` with encryption
+- Tokens stored in `FlutterSecureStorage` with encryption
 - Android: EncryptedSharedPreferences
 - iOS: Keychain with first unlock accessibility
 - No sensitive data logged in production
 - Secure HTTP headers and certificate pinning ready
 
-##  Supported Platforms
+## Supported Platforms
 
-- android (API 21+)
+- Android (API 21+)
 - iOS (12.0+)
 - Web (experimental)
 - macOS (experimental)
 - Windows (experimental)
 - Linux (experimental)
 
-##  License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## Author
 
 **Monther Ibrahim**
 
+- GitHub: [@Monther-bug](https://github.com/Monther-bug)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
 ---
 
+**Built with love for scalable Flutter applications**
