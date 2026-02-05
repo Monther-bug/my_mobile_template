@@ -42,7 +42,7 @@ void main() {
   const tEmail = 'test@example.com';
   const tPassword = 'password123';
   const tUserModel = UserModel(id: '1', email: tEmail, name: 'Test User');
-  const UserEntity tUser = tUserModel;
+  final UserEntity tUser = tUserModel.toEntity();
 
   group('login', () {
     test('should return user when remote call is successful', () async {
@@ -59,7 +59,7 @@ void main() {
       final result = await repository.login(email: tEmail, password: tPassword);
 
       // Assert
-      expect(result, const Right(tUser));
+      expect(result, Right(tUser));
       verify(
         () => mockRemoteDataSource.login(email: tEmail, password: tPassword),
       ).called(1);
@@ -130,7 +130,7 @@ void main() {
       final result = await repository.getCurrentUser();
 
       // Assert
-      expect(result, const Right(tUser));
+      expect(result, Right(tUser));
       verify(() => mockLocalDataSource.getCachedUser()).called(1);
     });
 
