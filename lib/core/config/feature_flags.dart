@@ -78,9 +78,7 @@ class FeatureFlags {
   static void setFromRemoteConfig(Map<String, bool> remoteFlags) {
     for (final entry in remoteFlags.entries) {
       try {
-        final feature = Feature.values.firstWhere(
-          (f) => f.name == entry.key,
-        );
+        final feature = Feature.values.firstWhere((f) => f.name == entry.key);
         _flags[feature] = entry.value;
       } catch (_) {
         // Feature not found, ignore
@@ -90,18 +88,12 @@ class FeatureFlags {
 
   /// Get all enabled features
   static List<Feature> get enabledFeatures {
-    return _flags.entries
-        .where((e) => e.value)
-        .map((e) => e.key)
-        .toList();
+    return _flags.entries.where((e) => e.value).map((e) => e.key).toList();
   }
 
   /// Get all disabled features
   static List<Feature> get disabledFeatures {
-    return _flags.entries
-        .where((e) => !e.value)
-        .map((e) => e.key)
-        .toList();
+    return _flags.entries.where((e) => !e.value).map((e) => e.key).toList();
   }
 }
 

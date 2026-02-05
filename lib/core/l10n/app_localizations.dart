@@ -89,10 +89,14 @@ class AppLocalizations {
   String get register => _localizedValues[locale.languageCode]!['register']!;
   String get email => _localizedValues[locale.languageCode]!['email']!;
   String get password => _localizedValues[locale.languageCode]!['password']!;
-  String get confirmPassword => _localizedValues[locale.languageCode]!['confirm_password']!;
-  String get forgotPassword => _localizedValues[locale.languageCode]!['forgot_password']!;
-  String get dontHaveAccount => _localizedValues[locale.languageCode]!['dont_have_account']!;
-  String get alreadyHaveAccount => _localizedValues[locale.languageCode]!['already_have_account']!;
+  String get confirmPassword =>
+      _localizedValues[locale.languageCode]!['confirm_password']!;
+  String get forgotPassword =>
+      _localizedValues[locale.languageCode]!['forgot_password']!;
+  String get dontHaveAccount =>
+      _localizedValues[locale.languageCode]!['dont_have_account']!;
+  String get alreadyHaveAccount =>
+      _localizedValues[locale.languageCode]!['already_have_account']!;
   String get signUp => _localizedValues[locale.languageCode]!['sign_up']!;
   String get signIn => _localizedValues[locale.languageCode]!['sign_in']!;
   String get logout => _localizedValues[locale.languageCode]!['logout']!;
@@ -108,18 +112,26 @@ class AppLocalizations {
   String get error => _localizedValues[locale.languageCode]!['error']!;
   String get success => _localizedValues[locale.languageCode]!['success']!;
   String get retry => _localizedValues[locale.languageCode]!['retry']!;
-  String get noInternet => _localizedValues[locale.languageCode]!['no_internet']!;
-  String get somethingWentWrong => _localizedValues[locale.languageCode]!['something_went_wrong']!;
+  String get noInternet =>
+      _localizedValues[locale.languageCode]!['no_internet']!;
+  String get somethingWentWrong =>
+      _localizedValues[locale.languageCode]!['something_went_wrong']!;
 
   // Validation
-  String get emailRequired => _localizedValues[locale.languageCode]!['email_required']!;
-  String get emailInvalid => _localizedValues[locale.languageCode]!['email_invalid']!;
-  String get passwordRequired => _localizedValues[locale.languageCode]!['password_required']!;
-  String get passwordMinLength => _localizedValues[locale.languageCode]!['password_min_length']!;
-  String get passwordsNotMatch => _localizedValues[locale.languageCode]!['passwords_not_match']!;
+  String get emailRequired =>
+      _localizedValues[locale.languageCode]!['email_required']!;
+  String get emailInvalid =>
+      _localizedValues[locale.languageCode]!['email_invalid']!;
+  String get passwordRequired =>
+      _localizedValues[locale.languageCode]!['password_required']!;
+  String get passwordMinLength =>
+      _localizedValues[locale.languageCode]!['password_min_length']!;
+  String get passwordsNotMatch =>
+      _localizedValues[locale.languageCode]!['passwords_not_match']!;
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override

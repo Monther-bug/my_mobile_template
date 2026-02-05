@@ -10,10 +10,7 @@ class AppVersion {
 
   /// Parse version string (e.g., "1.2.3")
   factory AppVersion.parse(String versionString, [int? build]) {
-    return AppVersion(
-      version: versionString,
-      buildNumber: build ?? 0,
-    );
+    return AppVersion(version: versionString, buildNumber: build ?? 0);
   }
 
   /// Compare versions
@@ -41,11 +38,7 @@ class AppVersion {
 }
 
 /// Update status
-enum UpdateStatus {
-  upToDate,
-  updateAvailable,
-  forceUpdateRequired,
-}
+enum UpdateStatus { upToDate, updateAvailable, forceUpdateRequired }
 
 /// Update info from server
 class UpdateInfo {

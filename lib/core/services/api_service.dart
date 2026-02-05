@@ -188,7 +188,10 @@ abstract class BaseApiService {
       case 422:
         return ValidationException(message: message, errors: response.data);
       case 429:
-        return const ServerException(message: 'Too many requests', statusCode: 429);
+        return const ServerException(
+          message: 'Too many requests',
+          statusCode: 429,
+        );
       case 500:
       case 502:
       case 503:
@@ -233,10 +236,7 @@ class _AuthInterceptor extends Interceptor {
 class _LoggingInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    AppLogger.d(
-      '→ ${options.method} ${options.path}',
-      tag: 'API',
-    );
+    AppLogger.d('→ ${options.method} ${options.path}', tag: 'API');
     handler.next(options);
   }
 

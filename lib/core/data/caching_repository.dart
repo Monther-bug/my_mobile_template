@@ -102,9 +102,7 @@ abstract class CachingRepository<T> {
     }
   }
 
-  Future<Either<Failure, T>> _cacheOnly(
-    Future<T?> Function() cacheCall,
-  ) async {
+  Future<Either<Failure, T>> _cacheOnly(Future<T?> Function() cacheCall) async {
     try {
       final cached = await cacheCall();
       if (cached != null) {
@@ -142,11 +140,7 @@ class CacheEntry<T> {
   final DateTime cachedAt;
   final Duration? maxAge;
 
-  CacheEntry({
-    required this.data,
-    required this.cachedAt,
-    this.maxAge,
-  });
+  CacheEntry({required this.data, required this.cachedAt, this.maxAge});
 
   bool get isExpired {
     if (maxAge == null) return false;

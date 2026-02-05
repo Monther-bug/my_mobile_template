@@ -18,12 +18,12 @@ class PaginatedData<T> {
   });
 
   factory PaginatedData.empty() => const PaginatedData(
-        items: [],
-        currentPage: 0,
-        totalPages: 0,
-        totalItems: 0,
-        hasMore: false,
-      );
+    items: [],
+    currentPage: 0,
+    totalPages: 0,
+    totalItems: 0,
+    hasMore: false,
+  );
 
   factory PaginatedData.fromJson(
     Map<String, dynamic> json,
@@ -38,7 +38,8 @@ class PaginatedData<T> {
       currentPage: json['current_page'] as int? ?? 1,
       totalPages: json['last_page'] as int? ?? 1,
       totalItems: json['total'] as int? ?? items.length,
-      hasMore: (json['current_page'] as int? ?? 1) <
+      hasMore:
+          (json['current_page'] as int? ?? 1) <
           (json['last_page'] as int? ?? 1),
     );
   }
@@ -85,9 +86,8 @@ class PaginationState<T> {
     this.error,
   });
 
-  factory PaginationState.initial() => PaginationState(
-        data: PaginatedData.empty(),
-      );
+  factory PaginationState.initial() =>
+      PaginationState(data: PaginatedData.empty());
 
   bool get isEmpty => data.items.isEmpty && !isLoading;
   bool get hasData => data.items.isNotEmpty;
@@ -111,8 +111,7 @@ class PaginationState<T> {
 }
 
 /// Base pagination notifier
-abstract class PaginationNotifier<T>
-    extends StateNotifier<PaginationState<T>> {
+abstract class PaginationNotifier<T> extends StateNotifier<PaginationState<T>> {
   PaginationNotifier() : super(PaginationState.initial());
 
   int _currentPage = 1;
@@ -130,10 +129,7 @@ abstract class PaginationNotifier<T>
       final data = await fetchPage(_currentPage, _perPage);
       state = state.copyWith(data: data, isLoading: false);
     } catch (e) {
-      state = state.copyWith(
-        isLoading: false,
-        error: e.toString(),
-      );
+      state = state.copyWith(isLoading: false, error: e.toString());
     }
   }
 
@@ -152,10 +148,7 @@ abstract class PaginationNotifier<T>
       );
     } catch (e) {
       _currentPage--; // Revert page on error
-      state = state.copyWith(
-        isLoadingMore: false,
-        error: e.toString(),
-      );
+      state = state.copyWith(isLoadingMore: false, error: e.toString());
     }
   }
 
