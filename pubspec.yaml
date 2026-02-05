@@ -71,6 +71,9 @@ dependencies:
   # Security
   flutter_secure_storage: ^9.2.2
 
+  # Package Info
+  package_info_plus: ^8.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
